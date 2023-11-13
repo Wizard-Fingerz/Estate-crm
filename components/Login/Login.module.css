@@ -1,0 +1,97 @@
+/* Apply the background image to the body and make it cover the whole page */
+.body {
+  background: url('/assets/bg_img.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  min-height: 100vh;
+  /* Use vh (viewport height) for full-screen image */
+  display: flex;
+  justify-content: center;
+  /* Center content horizontally */
+  align-items: center;
+  /* Center content vertically */
+}
+
+/* Center the form inside a container */
+.container {
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
+  /* Stack elements vertically */
+  align-items: center;
+  /* Center items horizontally */
+  border: 1px solid black;
+  padding: 50px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Add a semi-transparent white background to the container */
+}
+
+
+.brand {
+  display: flex;
+
+}
+
+.brand img {
+  padding-right: 10px;
+}
+
+.brand h1 {
+  color: #1C1B64;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.input {
+  border-radius: 15px;
+  border: 1px solid #1C1B64;
+  /* Fix the color value */
+  padding: 10px;
+  margin-bottom: 40px;
+  width: 20vw;
+}
+
+.button {
+  width: 20vw;
+  background-color: #1C1B64;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  /* Add a pointer cursor to the button */
+}
+
+.wlc {
+  text-align: center;
+  color: #1C1B64;
+  font-size: 32px;
+  /* Add 'px' to the font size */
+  font-weight: 700;
+  /* Add a weight value */
+  word-wrap: break-word;
+  margin: 70px;
+  line-height: 50px;
+}
+
+
+
+.form {
+  border-left: 1px solid #1C1B64;
+  padding-left: 40px;
+}
+
+.title {
+  color: #1C1B64;
+  font-size: 32;
+  font-weight: '700';
+  word-wrap: break-word;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 70px;
+}

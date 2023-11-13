@@ -1,0 +1,27 @@
+.container {
+    background-color: white;
+    color: #0E0D44;
+    width: 250px;
+    /* height: 100; */
+    border-radius: 20px;
+    padding: 50px;
+}
+
+.h3 {
+    color: #0E0D44;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.h1 {
+    padding-bottom: 20px;
+    color: #0E0D44;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

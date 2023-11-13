@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+  --color-bg: #1C1B64;
+  --color-border: #e5e7eb;
+  /* --color-sidebar-item: #f3f4f6; */
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu";
+}
+
+body {
+  background-color: #0b0b29;
+  font-family: "Ubuntu";
+}
+
+.layout {
+  display: flex;
+  position: static;
+  gap: 2rem;
+}
+
+.layout__main-content {
+  flex-grow: 1;
+  margin-left: 100px;
+  color: white;
+}
+
+
+
+/* .sidebar__wrapper {
+  position: relative;
+} */
+
+.sidebar__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 3; /* Set a higher z-index for the SideBar */
+}
+
+.sidebar {
+  margin: 5px;;
+  width: 12rem;
+  height: 100%;
+  background-color: var(--color-bg);
+  padding: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  overflow: hidden;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 0 4px 8px rgba(138, 43, 226, 0.1);
+  /* Purple box shadow */
+}
+
+
+.sidebar__top {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar__logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
+  border-radius: 1rem;
+}
+
+.sidebar__logo-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+}
+
+.sidebar__list {
+  list-style: none;
+}
+
+.sidebar__link {
+  display: inline-block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.8rem 1rem;
+  display: flex;
+  background-color: var(--color-sidebar-item);
+  margin-bottom: 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+
+.sidebar__link--active {
+  color: #83c7f5;
+  background-color: #1C1B64;
+}
+
+.sidebar__icon {
+  display: inline-block;
+  font-size: 1.2rem;
+}
+
+.sidebar__name {
+  margin-left: 0.5rem;
+}
+
+[data-collapse="true"] {
+  width: 5.3rem;
+}
+
+[data-collapse="true"] .sidebar__name,
+[data-collapse="true"] .sidebar__logo-name {
+  display: none;
+}
+
+.btn {
+  position: absolute;
+  right: 0;
+  top: 4.7rem;
+  border: none;
+  background-color: var(--color-bg);
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translateX(50%);
+  font-size: 1.1rem;
+}
+
+
+.table-container {
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px 0;
+  border-radius: 10px;
+  border: 1px solid rgb(211, 211, 211);
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(138, 43, 226, 0.1);
+
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow: scroll;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  text-align: left;
+}
+
+.table th {
+  font-size: 12px;
+}
+
+.table tr {
+  border-top: 1px solid rgb(211, 211, 211);
+}
+
+.table td,
+.table th {
+  padding: 10px;
+}
+
+.table tr td:nth-of-type(1) {
+  font-weight: bold;
+}
+
+.table tr td:not(:nth-of-type(1)) {
+  color: gray;
+}
+
+.table tr td span {
+  display: inline-block;
+
+}
+
+.table tr td span:nth-of-type(1)>svg {
+  font-size: 20px;
+  margin-right: 5px;
+  position: relative;
+  top: 5px;
+  color: black
+}
+
+.table tr th span:nth-of-type(2) {
+  position: relative;
+  top: 2px;
+}
+
