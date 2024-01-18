@@ -1,5 +1,4 @@
-import ActionButton from "../sample_components/ui-components/ActionButton";
-
+import ActionButton from "../../sample_components/ui-components/ActionButton";
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -9,8 +8,9 @@ import {
     FaEdit,
 } from "react-icons/fa";
 import { useState } from "react";
-import Modal from "../sample_components/ui-components/Modal";
-import PropertyTable from "../DataTables/PropertyTable";
+import Modal from "../../sample_components/ui-components/Modal";
+import AddPropertyForm from "../../Form/AddPropertyForm";
+import PropertyTable from "../../DataTables/PropertyTable";
 
 const table_column_heading = [
     {
@@ -20,7 +20,6 @@ const table_column_heading = [
     {
         key: "property_name",
         heading: "Property Name",
-        // icon: FaLongArrowAltDown,
     },
 
     {
@@ -134,22 +133,39 @@ const table_data = [
     },
 ]
 const PropertyList = () => {
+
+    const [addPropertyModal, setAddPropertyModal] = useState(false);
+    const [downloadPropertyModal, setDownloadPropertyModal] = useState(false);
+
+    const closeAddPropertyModal = () => {
+        setAddPropertyModal(false);
+    };
+
+    const openAddPropertyModal = () => {
+        setAddPropertyModal(true);
+    };
+
+    const closeDownloadPropertyModal = () => {
+        setDownloadPropertyModal(false);
+    };
+
+    const openDownloadPropertyModal = () => {
+        setDownloadPropertyModal(true);
+    };
+
     const [modal, setModal] = useState(false);
     const handleClose = () => {
         //alert('closing');
         setModal(false);
     };
 
-    const openModal = () => {
-        setModal(true);
-    };
     return (
         <>
 
             <PropertyTable
                 headingRightItem1={() => (
                     <ActionButton
-                        onClick={openModal}
+                        onClick={openAddPropertyModal}
                         label="Add Property"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
@@ -158,7 +174,7 @@ const PropertyList = () => {
                 )}
                 headingRightItem2={() => (
                     <ActionButton
-                        onClick={openModal}
+                        onClick={openDownloadPropertyModal}
                         label="Download All"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
@@ -169,12 +185,29 @@ const PropertyList = () => {
                 data={table_data}
             />
             <Modal
-                isOpen={modal}
-                heading={"Download all business details"}
-                onClose={handleClose}
+                isOpen={addPropertyModal}
+                heading={"Add Property"}
+                onClose={closeAddPropertyModal}
+                positiveText={'Add'}
+                negativeText={'Cancel'}
+            >
+                <AddPropertyForm/>
+                {/* Add your form or components for adding property */}
+                {/* For example: */}
+                {/* <AddPropertyForm onSubmit={handleAddProperty} /> */}
+            </Modal>
+
+            <Modal
+                isOpen={downloadPropertyModal}
+                heading={"Download All Business Details"}
+                onClose={closeDownloadPropertyModal}
                 positiveText={'Download'}
                 negativeText={'Cancel'}
-            />
+            >
+                {/* Add your components for downloading property details */}
+                {/* For example: */}
+                {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
+            </Modal>
         </>
     );
 };

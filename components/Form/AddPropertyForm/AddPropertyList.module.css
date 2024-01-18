@@ -1,0 +1,29 @@
+.input {
+    border-radius: 15px;
+    border: 1px solid #1C1B64;
+    /* Fix the color value */
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 20vw;
+  }
+
+  .form{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .firstForm{
+    margin: 20px;
+    padding: 20px;
+  }
+  .secondForm{
+    border-left: 1px solid #1C1B64;
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .text{
+    color:black;
+    padding-bottom: 10px;
+  }
+  

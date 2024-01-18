@@ -18,7 +18,6 @@ const Modal = ({
         <section className={styles["modal-bg"]}>
           <div className={styles["modal-container"]}>
             <div className={styles["modal-header"]}>
-              <h3 className={styles["modal-heading"]}>{heading}</h3>
               <button
                 onClick={onClose}
                 className={styles["close-btn"]}
@@ -26,13 +25,15 @@ const Modal = ({
                 X
               </button>
             </div>
-            <div className={styles["modal-body"]}>{children}</div>
+              <h3 className={styles["modal-heading"]}>{heading}</h3>
+            <div className={styles["modal-body"]}>
+              {children}</div>
             <div className={styles["modal-footer"]}>
               <div className={styles["footer-container"]}>
                 <div className="mr-7">
                   <InlineButton onClick={onCancel} fontWeight={'normal'} label="Cancel" />
                 </div>
-                <div className="mr-7" style={{ marginLeft: '20px'}}>
+                <div className="mr-7" style={{ marginLeft: '20px' }}>
                   <InlineButton onClick={onSubmit} label={positiveText} />
                 </div>
               </div>
