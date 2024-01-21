@@ -30,6 +30,38 @@ body {
   color: white;
 }
 
+.changePassword{
+  margin: 5% 35%;
+  width: 30vw;
+  border: 1px solid black;
+  justify-items: center;
+  align-items: center;
+  padding: 50px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.changePassword input {
+  border-radius: 15px;
+  border: 1px solid #1C1B64;
+  /* Fix the color value */
+  padding: 10px;
+  margin: 20px 0;
+  width: 20vw;
+}
+
+.changePassword button {
+  width: 20vw;
+  background-color: #1C1B64;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  /* Add a pointer cursor to the button */
+}
+
+
+
 
 
 /* .sidebar__wrapper {

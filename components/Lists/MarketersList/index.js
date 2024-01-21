@@ -1,4 +1,5 @@
 import ActionButton from "../../sample_components/ui-components/ActionButton";
+
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -9,45 +10,36 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
-import EditPropertyForm from "../../Form/EditPropertyForm";
-import AddPropertyForm from "../../Form/AddPropertyForm";
-import PropertyTable from "../../DataTables/PropertyTable";
+import AddMarketerForm from "../../Form/AddMarketerForm";
+import MarketerTable from "../../DataTables/MarketerTable";
 
 const table_column_heading = [
     {
-        key: "reference_id",
-        heading: "Reference ID",
+        key: "employee_id",
+        heading: "Employee ID",
     },
     {
-        key: "property_name",
-        heading: "Property Name",
-    },
-
-    {
-        key: "property_address",
-        heading: "Property Address",
-    },
-    {
-        key: "property_description",
-        heading: "Property Description",
+        key: "employee_name",
+        heading: "Employee Name",
+        // icon: FaLongArrowAltDown,
     },
 
     {
-        key: "property_owner",
-        heading: "Property Owner",
+        key: "employee_contract",
+        heading: "Employee Contract",
     },
     {
-        key: "property_status",
-        heading: "Property Status",
-    },
-    {
-        key: "property_value",
-        heading: "Property Value",
+        key: "no_of_followup",
+        heading: "Number of Follow-ups",
     },
 
     {
-        key: "property_type",
-        heading: "Property Type",
+        key: "no_of_wons",
+        heading: "Number of Wons",
+    },
+    {
+        key: "rating",
+        heading: "Ratings",
     },
     {
         key: "view-btn",
@@ -68,36 +60,30 @@ const table_column_heading = [
 const table_data = [
     {
         id: 1,
-        reference_id: {
+        employee_id: {
             value: "1",
         },
-        property_name: {
-            value: "1 acre of land",
+        employee_name: {
+            value: "Hassan Uril",
         },
-        property_address: {
-            value: "Lekki Lagos",
+        employee_contract: {
+            value: "+23470773473843",
         },
-        property_description: {
-            value: "1 acre of land in Lekki",
+        no_of_followup: {
+            value: "20",
         },
-        property_owner: {
-            value: "Adewale Kazeem",
+        no_of_wons: {
+            value: "23",
         },
-        property_status: {
-            value: "",
+        rating: {
+            value: "5.0",
         },
-        property_value: {
-            value: "",
-        },
-        property_type: {
-            value: "Land",
-        },
+       
     },
 ]
-const PropertyList = () => {
-
-    const [addPropertyModal, setAddPropertyModal] = useState(false);
-    const [downloadPropertyModal, setDownloadPropertyModal] = useState(false);
+const MarketersList = () => {
+    const [addMarketerModal, setAddMarketerModal] = useState(false);
+    const [downloadMarketerModal, setDownloadMarketerModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
@@ -126,20 +112,20 @@ const PropertyList = () => {
         setDeleteModal(false);
     };
 
-    const closeAddPropertyModal = () => {
-        setAddPropertyModal(false);
+    const closeAddMarketerModal = () => {
+        setAddMarketerModal(false);
     };
 
-    const openAddPropertyModal = () => {
-        setAddPropertyModal(true);
+    const openAddMarketerModal = () => {
+        setAddMarketerModal(true);
     };
 
-    const closeDownloadPropertyModal = () => {
-        setDownloadPropertyModal(false);
+    const closeDownloadMarketerModal = () => {
+        setDownloadMarketerModal(false);
     };
 
-    const openDownloadPropertyModal = () => {
-        setDownloadPropertyModal(true);
+    const openDownloadMarketerModal = () => {
+        setDownloadMarketerModal(true);
     };
 
     const [modal, setModal] = useState(false);
@@ -151,11 +137,11 @@ const PropertyList = () => {
     return (
         <>
 
-            <PropertyTable
+            <MarketerTable
                 headingRightItem1={() => (
                     <ActionButton
-                        onClick={openAddPropertyModal}
-                        label="Add Property"
+                        onClick={openAddMarketerModal}
+                        label="Add Marketer"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
@@ -163,7 +149,7 @@ const PropertyList = () => {
                 )}
                 headingRightItem2={() => (
                     <ActionButton
-                        onClick={openDownloadPropertyModal}
+                        onClick={openDownloadMarketerModal}
                         label="Download All"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
@@ -171,61 +157,25 @@ const PropertyList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={table_data.map((item) => ({
-                    ...item,
-                    "view-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="View"
-                                Icon={FaEye}
-                                inverse={true}
-                                onClick={openViewModal}
-                                style={{ color: 'blue', borderColor: 'blue' }}
-                            />
-                        ),
-                    },
-                    "edit-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="Edit"
-                                Icon={FaEdit}
-                                inverse={true}
-                                onClick={openEditModal}
-                                style={{ color: 'green', borderColor: 'green' }}
-                            />
-                        ),
-                    },
-                    "delete-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="Delete"
-                                Icon={FaTrash}
-                                inverse={true}
-                                onClick={openDeleteModal}
-                                style={{ color: 'red', borderColor: 'red' }}
-                            />
-                        ),
-                    },
-                }))}
-
+                data={table_data}
             />
             <Modal
-                isOpen={addPropertyModal}
-                heading={"Add Property"}
-                onClose={closeAddPropertyModal}
+                isOpen={addMarketerModal}
+                heading={"Add Marketer"}
+                onClose={closeAddMarketerModal}
                 positiveText={'Add'}
                 negativeText={'Cancel'}
             >
-                <AddPropertyForm />
+                <AddMarketerForm/>
                 {/* Add your form or components for adding property */}
                 {/* For example: */}
-                {/* <AddPropertyForm onSubmit={handleAddProperty} /> */}
+                {/* <AddMarketerForm onSubmit={handleAddProperty} /> */}
             </Modal>
 
             <Modal
-                isOpen={downloadPropertyModal}
+                isOpen={downloadMarketerModal}
                 heading={"Download All Business Details"}
-                onClose={closeDownloadPropertyModal}
+                onClose={closeDownloadMarketerModal}
                 positiveText={'Download'}
                 negativeText={'Cancel'}
             >
@@ -233,10 +183,10 @@ const PropertyList = () => {
                 {/* For example: */}
                 {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
             </Modal>
-
+            
             <Modal
                 isOpen={viewModal}
-                heading={"View Property"}
+                heading={"View Marketer"}
                 onClose={closeViewModal}
                 positiveText={'Close'}
                 negativeText={null}
@@ -250,19 +200,19 @@ const PropertyList = () => {
 
             <Modal
                 isOpen={editModal}
-                heading={"Edit Property"}
+                heading={"Edit Marketer"}
                 onClose={closeEditModal}
                 positiveText={'Save'}
                 negativeText={'Cancel'}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditPropertyForm />
+                <EditMarketerForm />
             </Modal>
 
             <Modal
                 isOpen={deleteModal}
-                heading={"Delete Property"}
+                heading={"Delete Marketer"}
                 onClose={closeDeleteModal}
                 positiveText={'Delete'}
                 negativeText={'Cancel'}
@@ -283,8 +233,9 @@ const PropertyList = () => {
                     />
                 </div>
             </Modal>
+
         </>
     );
 };
 
-export default PropertyList;
+export default MarketersList;

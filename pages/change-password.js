@@ -3,10 +3,9 @@
 import { useState } from 'react';
 
 function ChangePassword() {
+  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  // Inside your React component
 
   const handlePasswordChange = async () => {
     const data = {
@@ -14,10 +13,18 @@ function ChangePassword() {
       new_password: newPassword,
     };
 
+    const token = localStorage.getItem('token');
     try {
-      const response = await axios.post('/api/change-password/', data);
+      const response = await fetch('http://127.0.0.1:8000/change-password/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`, // Include the token for authorization
+        },
+        body: JSON.stringify(data),
+      });
 
-      if (response.status === 200) {
+      if (response.ok) {
         // Password changed successfully
         // Redirect the user to their dashboard or another page
         window.location.href = '/dashboard';
@@ -32,20 +39,25 @@ function ChangePassword() {
   };
 
   return (
-    <div>
+    <div className='changePassword'>
       <h2>Change Password</h2>
       <input
+        type="password"
+        placeholder="Old Password"
+        value={oldPassword}
+        onChange={(e) => setOldPassword(e.target.value)}
+      /><br /><input
         type="password"
         placeholder="New Password"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-      />
+      /><br />
       <input
         type="password"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-      />
+      /><br />
       <button onClick={handlePasswordChange}>Change Password</button>
     </div>
   );

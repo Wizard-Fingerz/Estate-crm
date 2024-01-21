@@ -9,12 +9,21 @@ function Login() {
     useEffect(() => {
         // Check if the user needs to change their password
         async function checkPasswordChange() {
+            // Retrieve the token from local storage
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Token not found in local storage');
+                return;
+            }
+
             // Send a request to your API endpoint to determine if password change is required
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/check-password-change/', {
+                const response = await fetch('http://127.0.0.1:8000/check-password-change/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Token ${token}`, // Include the token for authorization
                     },
                 });
 
@@ -43,7 +52,7 @@ function Login() {
 
         // Send a POST request to your Django API endpoint
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/login/', {
+            const response = await fetch('http://127.0.0.1:8000/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,6 +62,12 @@ function Login() {
 
             if (response.ok) {
                 const data = await response.json();
+
+                // Display the token in the console
+                console.log('Token:', data.token);
+
+                // Save the token to the local storage
+                localStorage.setItem('token', data.token);
                 // Data should include user_type and user_id
                 if (changePasswordRequired) {
                     window.location.href = '/change-password'; // Redirect to the password change page
@@ -60,6 +75,8 @@ function Login() {
                     window.location.href = '/marketer-dashboard'; // Redirect to the marketer dashboard
                 } else if (data.user_type === 'accountant') {
                     window.location.href = '/accountant-dashboard'; // Redirect to the accountant dashboard
+                } else if (data.user_type === 'admin') {
+                    window.location.href = '/admin'; // Redirect to the accountant dashboard
                 }
             } else {
                 // Handle login failure
@@ -76,12 +93,9 @@ function Login() {
             <div className={styles.container}>
                 <div className={styles.text}>
                     <div className={styles.brand}>
-                        <img src='assets/logo.png'/>  
+                        <img src='assets/logo.png' />
                         <h1>Estate Name</h1>
-
                     </div>
-
-
                     <h1 className={styles.wlc}>Welcome <br />to <br />Your Estate <br />CRM System</h1>
                 </div>
                 <div className={styles.form}>

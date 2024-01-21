@@ -1,4 +1,5 @@
 import ActionButton from "../../sample_components/ui-components/ActionButton";
+
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -9,45 +10,32 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
-import EditPropertyForm from "../../Form/EditPropertyForm";
-import AddPropertyForm from "../../Form/AddPropertyForm";
-import PropertyTable from "../../DataTables/PropertyTable";
+import AddProspectForm from "../../Form/AddProspectForm";
+import ProspectTable from "../../DataTables/ProspectTable";
 
 const table_column_heading = [
     {
-        key: "reference_id",
-        heading: "Reference ID",
+        key: "name",
+        heading: "Name",
     },
     {
-        key: "property_name",
-        heading: "Property Name",
-    },
-
-    {
-        key: "property_address",
-        heading: "Property Address",
-    },
-    {
-        key: "property_description",
-        heading: "Property Description",
+        key: "address",
+        heading: "Address",
+        // icon: FaLongArrowAltDown,
     },
 
     {
-        key: "property_owner",
-        heading: "Property Owner",
+        key: "email",
+        heading: "Email",
     },
     {
-        key: "property_status",
-        heading: "Property Status",
-    },
-    {
-        key: "property_value",
-        heading: "Property Value",
+        key: "phone_number",
+        heading: "Phone Number",
     },
 
     {
-        key: "property_type",
-        heading: "Property Type",
+        key: "whatsapp_number",
+        heading: "WhatsApp Numberr",
     },
     {
         key: "view-btn",
@@ -68,36 +56,27 @@ const table_column_heading = [
 const table_data = [
     {
         id: 1,
-        reference_id: {
-            value: "1",
+        name: {
+            value: "Tokyo Hassan",
         },
-        property_name: {
-            value: "1 acre of land",
+        address: {
+            value: "Lagos, Nigeria",
         },
-        property_address: {
-            value: "Lekki Lagos",
+        email: {
+            value: "tokyo@gmail.com",
         },
-        property_description: {
-            value: "1 acre of land in Lekki",
+        phone_number: {
+            value: "+234902343434",
         },
-        property_owner: {
-            value: "Adewale Kazeem",
-        },
-        property_status: {
-            value: "",
-        },
-        property_value: {
-            value: "",
-        },
-        property_type: {
-            value: "Land",
+
+        whatsapp_number: {
+            value: "+234902343434",
         },
     },
 ]
-const PropertyList = () => {
-
-    const [addPropertyModal, setAddPropertyModal] = useState(false);
-    const [downloadPropertyModal, setDownloadPropertyModal] = useState(false);
+const ProspectsList = () => {
+    const [addProspectModal, setAddProspectModal] = useState(false);
+    const [downloadProspectModal, setDownloadProspectModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
@@ -125,21 +104,20 @@ const PropertyList = () => {
     const closeDeleteModal = () => {
         setDeleteModal(false);
     };
-
-    const closeAddPropertyModal = () => {
-        setAddPropertyModal(false);
+    const closeAddProspectModal = () => {
+        setAddProspectModal(false);
     };
 
-    const openAddPropertyModal = () => {
-        setAddPropertyModal(true);
+    const openAddProspectModal = () => {
+        setAddProspectModal(true);
     };
 
-    const closeDownloadPropertyModal = () => {
-        setDownloadPropertyModal(false);
+    const closeDownloadProspectModal = () => {
+        setDownloadProspectModal(false);
     };
 
-    const openDownloadPropertyModal = () => {
-        setDownloadPropertyModal(true);
+    const openDownloadProspectModal = () => {
+        setDownloadProspectModal(true);
     };
 
     const [modal, setModal] = useState(false);
@@ -151,11 +129,11 @@ const PropertyList = () => {
     return (
         <>
 
-            <PropertyTable
+            <ProspectTable
                 headingRightItem1={() => (
                     <ActionButton
-                        onClick={openAddPropertyModal}
-                        label="Add Property"
+                        onClick={openAddProspectModal}
+                        label="Add Prospect"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
@@ -163,7 +141,7 @@ const PropertyList = () => {
                 )}
                 headingRightItem2={() => (
                     <ActionButton
-                        onClick={openDownloadPropertyModal}
+                        onClick={openDownloadProspectModal}
                         label="Download All"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
@@ -209,23 +187,24 @@ const PropertyList = () => {
                 }))}
 
             />
+
             <Modal
-                isOpen={addPropertyModal}
-                heading={"Add Property"}
-                onClose={closeAddPropertyModal}
+                isOpen={addProspectModal}
+                heading={"Add Prospect"}
+                onClose={closeAddProspectModal}
                 positiveText={'Add'}
                 negativeText={'Cancel'}
             >
-                <AddPropertyForm />
+                <AddProspectForm />
                 {/* Add your form or components for adding property */}
                 {/* For example: */}
                 {/* <AddPropertyForm onSubmit={handleAddProperty} /> */}
             </Modal>
 
             <Modal
-                isOpen={downloadPropertyModal}
-                heading={"Download All Business Details"}
-                onClose={closeDownloadPropertyModal}
+                isOpen={downloadProspectModal}
+                heading={"Download All Prospect Details"}
+                onClose={closeDownloadProspectModal}
                 positiveText={'Download'}
                 negativeText={'Cancel'}
             >
@@ -233,10 +212,9 @@ const PropertyList = () => {
                 {/* For example: */}
                 {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
             </Modal>
-
             <Modal
                 isOpen={viewModal}
-                heading={"View Property"}
+                heading={"View Prospect"}
                 onClose={closeViewModal}
                 positiveText={'Close'}
                 negativeText={null}
@@ -250,7 +228,7 @@ const PropertyList = () => {
 
             <Modal
                 isOpen={editModal}
-                heading={"Edit Property"}
+                heading={"Edit Prospect"}
                 onClose={closeEditModal}
                 positiveText={'Save'}
                 negativeText={'Cancel'}
@@ -262,7 +240,7 @@ const PropertyList = () => {
 
             <Modal
                 isOpen={deleteModal}
-                heading={"Delete Property"}
+                heading={"Delete Prospect"}
                 onClose={closeDeleteModal}
                 positiveText={'Delete'}
                 negativeText={'Cancel'}
@@ -287,4 +265,4 @@ const PropertyList = () => {
     );
 };
 
-export default PropertyList;
+export default ProspectsList;
