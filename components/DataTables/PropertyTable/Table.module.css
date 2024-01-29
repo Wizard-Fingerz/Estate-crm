@@ -31,11 +31,17 @@
     border-collapse: collapse;
     background: #fff;
     text-align: left;
+    color: #0b0b29;
 }
 
 .table th {
     font-size: 12px;
-  color: #0b0b29;
+    color: #0b0b29;
+
+}
+
+.tbody{
+    color: #0b0b29;
 
 }
 

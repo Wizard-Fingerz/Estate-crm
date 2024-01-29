@@ -9,8 +9,6 @@ const Modal = ({
   heading = '',
   positiveText = '',
   children,
-  onSubmit = () => { },
-  onCancel = () => { }
 }) => {
   return (
     <>
@@ -25,19 +23,9 @@ const Modal = ({
                 X
               </button>
             </div>
-              <h3 className={styles["modal-heading"]}>{heading}</h3>
+            <h3 className={styles["modal-heading"]}>{heading}</h3>
             <div className={styles["modal-body"]}>
               {children}</div>
-            <div className={styles["modal-footer"]}>
-              <div className={styles["footer-container"]}>
-                <div className="mr-7">
-                  <InlineButton onClick={onCancel} fontWeight={'normal'} label="Cancel" />
-                </div>
-                <div className="mr-7" style={{ marginLeft: '20px' }}>
-                  <InlineButton onClick={onSubmit} label={positiveText} />
-                </div>
-              </div>
-            </div>
           </div>
         </section>
       ) : null}

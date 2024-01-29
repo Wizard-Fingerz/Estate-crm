@@ -150,7 +150,7 @@ const ProspectTable = ({
                                 ))}
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className={styles.tbody}>
                             {currentItems.map((tr) => (
                                 <tr key={tr.id}>
                                     {heading.map((th, i) => (

@@ -17,8 +17,8 @@ const ProspectCard = ({ user, onSelect, onUnselect }) => {
   return (
     <div className={styles.card}>
       <div className={styles.text}>
-        <h3>{user.prospect}</h3>
-        <p>{user.property}</p>
+        <h3>{user.prefix}. {user.full_name}</h3>
+        <p>{user.property.name} @ {user.property.address}</p>
       </div><div className={styles.actionButtons}>
         {!isSelected ? (
           <button onClick={handleSelect}>Select</button>

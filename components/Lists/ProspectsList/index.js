@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
+import EditProspectForm from "../../Form/EditProspectForm";
 import ProspectTable from "../../DataTables/ProspectTable";
 
 const table_column_heading = [
@@ -192,8 +193,6 @@ const ProspectsList = () => {
                 isOpen={addProspectModal}
                 heading={"Add Prospect"}
                 onClose={closeAddProspectModal}
-                positiveText={'Add'}
-                negativeText={'Cancel'}
             >
                 <AddProspectForm />
                 {/* Add your form or components for adding property */}
@@ -205,8 +204,6 @@ const ProspectsList = () => {
                 isOpen={downloadProspectModal}
                 heading={"Download All Prospect Details"}
                 onClose={closeDownloadProspectModal}
-                positiveText={'Download'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for downloading property details */}
                 {/* For example: */}
@@ -216,8 +213,6 @@ const ProspectsList = () => {
                 isOpen={viewModal}
                 heading={"View Prospect"}
                 onClose={closeViewModal}
-                positiveText={'Close'}
-                negativeText={null}
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
@@ -230,20 +225,16 @@ const ProspectsList = () => {
                 isOpen={editModal}
                 heading={"Edit Prospect"}
                 onClose={closeEditModal}
-                positiveText={'Save'}
-                negativeText={'Cancel'}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditPropertyForm />
+                <EditProspectForm />
             </Modal>
 
             <Modal
                 isOpen={deleteModal}
                 heading={"Delete Prospect"}
                 onClose={closeDeleteModal}
-                positiveText={'Delete'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for deleting property details */}
                 {/* For example: */}

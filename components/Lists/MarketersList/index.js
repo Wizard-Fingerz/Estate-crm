@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddMarketerForm from "../../Form/AddMarketerForm";
+import EditMarketerForm from "../../Form/EditMarketerForm";
 import MarketerTable from "../../DataTables/MarketerTable";
 
 const table_column_heading = [
@@ -78,7 +79,7 @@ const table_data = [
         rating: {
             value: "5.0",
         },
-       
+
     },
 ]
 const MarketersList = () => {
@@ -136,7 +137,6 @@ const MarketersList = () => {
 
     return (
         <>
-
             <MarketerTable
                 headingRightItem1={() => (
                     <ActionButton
@@ -157,16 +157,50 @@ const MarketersList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={table_data}
+                data={table_data.map((item) => ({
+                    ...item,
+                    "view-btn": {
+                        component: () => (
+                            <ActionButton
+                                label="View"
+                                Icon={FaEye}
+                                inverse={true}
+                                onClick={openViewModal}
+                                style={{ color: 'blue', borderColor: 'blue' }}
+                            />
+                        ),
+                    },
+                    "edit-btn": {
+                        component: () => (
+                            <ActionButton
+                                label="Edit"
+                                Icon={FaEdit}
+                                inverse={true}
+                                onClick={openEditModal}
+                                style={{ color: 'green', borderColor: 'green' }}
+                            />
+                        ),
+                    },
+                    "delete-btn": {
+                        component: () => (
+                            <ActionButton
+                                label="Delete"
+                                Icon={FaTrash}
+                                inverse={true}
+                                onClick={openDeleteModal}
+                                style={{ color: 'red', borderColor: 'red' }}
+                            />
+                        ),
+                    },
+                }))}
+
             />
             <Modal
                 isOpen={addMarketerModal}
                 heading={"Add Marketer"}
                 onClose={closeAddMarketerModal}
-                positiveText={'Add'}
-                negativeText={'Cancel'}
             >
-                <AddMarketerForm/>
+                <AddMarketerForm />
                 {/* Add your form or components for adding property */}
                 {/* For example: */}
                 {/* <AddMarketerForm onSubmit={handleAddProperty} /> */}
@@ -176,20 +210,16 @@ const MarketersList = () => {
                 isOpen={downloadMarketerModal}
                 heading={"Download All Business Details"}
                 onClose={closeDownloadMarketerModal}
-                positiveText={'Download'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for downloading property details */}
                 {/* For example: */}
                 {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
             </Modal>
-            
+
             <Modal
                 isOpen={viewModal}
                 heading={"View Marketer"}
                 onClose={closeViewModal}
-                positiveText={'Close'}
-                negativeText={null}
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
@@ -202,8 +232,6 @@ const MarketersList = () => {
                 isOpen={editModal}
                 heading={"Edit Marketer"}
                 onClose={closeEditModal}
-                positiveText={'Save'}
-                negativeText={'Cancel'}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
@@ -214,8 +242,6 @@ const MarketersList = () => {
                 isOpen={deleteModal}
                 heading={"Delete Marketer"}
                 onClose={closeDeleteModal}
-                positiveText={'Delete'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for deleting property details */}
                 {/* For example: */}

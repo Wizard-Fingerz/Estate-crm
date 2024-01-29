@@ -29,6 +29,7 @@
 }
 
 .actionButtons button {
+    margin: 5px;
     width:82px;
     padding: 5px;
     border-radius: 15px;

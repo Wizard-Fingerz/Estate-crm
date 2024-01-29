@@ -7,7 +7,7 @@ import {
     FaTrash,
     FaEdit,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import EditPropertyForm from "../../Form/EditPropertyForm";
 import AddPropertyForm from "../../Form/AddPropertyForm";
@@ -32,10 +32,6 @@ const table_column_heading = [
         heading: "Property Description",
     },
 
-    {
-        key: "property_owner",
-        heading: "Property Owner",
-    },
     {
         key: "property_status",
         heading: "Property Status",
@@ -65,42 +61,43 @@ const table_column_heading = [
     },
 ];
 
-const table_data = [
-    {
-        id: 1,
-        reference_id: {
-            value: "1",
-        },
-        property_name: {
-            value: "1 acre of land",
-        },
-        property_address: {
-            value: "Lekki Lagos",
-        },
-        property_description: {
-            value: "1 acre of land in Lekki",
-        },
-        property_owner: {
-            value: "Adewale Kazeem",
-        },
-        property_status: {
-            value: "",
-        },
-        property_value: {
-            value: "",
-        },
-        property_type: {
-            value: "Land",
-        },
-    },
-]
 const PropertyList = () => {
-
+    const [tableData, setTableData] = useState([]);
     const [addPropertyModal, setAddPropertyModal] = useState(false);
     const [downloadPropertyModal, setDownloadPropertyModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Token not found in local storage');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/property/properties/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data);
+                setTableData(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const openViewModal = () => {
         setViewModal(true);
@@ -171,15 +168,22 @@ const PropertyList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={table_data.map((item) => ({
-                    ...item,
+                data={tableData.map((item) => ({
+                    id: item.id,
+                    reference_id: item.id,
+                    property_name: item.name,
+                    property_address: item.address,
+                    property_description: item.description,
+                    property_status: item.status,
+                    property_value: item.value,
+                    property_type: item.type,
                     "view-btn": {
                         component: () => (
                             <ActionButton
                                 label="View"
                                 Icon={FaEye}
                                 inverse={true}
-                                onClick={openViewModal}
+                                onClick={() => openViewModal(item.id)} // Pass item.id to the openViewModal function
                                 style={{ color: 'blue', borderColor: 'blue' }}
                             />
                         ),
@@ -190,7 +194,7 @@ const PropertyList = () => {
                                 label="Edit"
                                 Icon={FaEdit}
                                 inverse={true}
-                                onClick={openEditModal}
+                                onClick={() => openEditModal(item.id)} // Pass item.id to the openEditModal function
                                 style={{ color: 'green', borderColor: 'green' }}
                             />
                         ),
@@ -201,20 +205,18 @@ const PropertyList = () => {
                                 label="Delete"
                                 Icon={FaTrash}
                                 inverse={true}
-                                onClick={openDeleteModal}
+                                onClick={() => openDeleteModal(item.id)} // Pass item.id to the openDeleteModal function
                                 style={{ color: 'red', borderColor: 'red' }}
                             />
                         ),
                     },
                 }))}
-
+                
             />
             <Modal
                 isOpen={addPropertyModal}
                 heading={"Add Property"}
                 onClose={closeAddPropertyModal}
-                positiveText={'Add'}
-                negativeText={'Cancel'}
             >
                 <AddPropertyForm />
                 {/* Add your form or components for adding property */}
@@ -226,8 +228,6 @@ const PropertyList = () => {
                 isOpen={downloadPropertyModal}
                 heading={"Download All Business Details"}
                 onClose={closeDownloadPropertyModal}
-                positiveText={'Download'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for downloading property details */}
                 {/* For example: */}
@@ -238,8 +238,6 @@ const PropertyList = () => {
                 isOpen={viewModal}
                 heading={"View Property"}
                 onClose={closeViewModal}
-                positiveText={'Close'}
-                negativeText={null}
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
@@ -252,8 +250,6 @@ const PropertyList = () => {
                 isOpen={editModal}
                 heading={"Edit Property"}
                 onClose={closeEditModal}
-                positiveText={'Save'}
-                negativeText={'Cancel'}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
@@ -264,8 +260,6 @@ const PropertyList = () => {
                 isOpen={deleteModal}
                 heading={"Delete Property"}
                 onClose={closeDeleteModal}
-                positiveText={'Delete'}
-                negativeText={'Cancel'}
             >
                 {/* Add your components for deleting property details */}
                 {/* For example: */}

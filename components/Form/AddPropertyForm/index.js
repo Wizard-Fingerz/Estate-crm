@@ -8,6 +8,7 @@ function AddPropertyForm() {
     const [property_description, setPropertyDescription] = useState('');
     const [property_value, setPropertyValue] = useState('');
     const [property_type, setPropertyType] = useState('');
+    const [property_other_type, setOtherPropertyType] = useState('');
     const [property_media1, setPropertyMedia1] = useState('');
     const [property_media2, setPropertyMedia2] = useState('');
     const [property_media3, setPropertyMedia3] = useState('');
@@ -16,8 +17,6 @@ function AddPropertyForm() {
     const [media2FileName, setMedia2FileName] = useState('');
     const [media3FileName, setMedia3FileName] = useState('');
     const [media4FileName, setMedia4FileName] = useState('');
-
-
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -28,6 +27,7 @@ function AddPropertyForm() {
         formData.append('property_description', property_description);
         formData.append('property_value', property_value);
         formData.append('property_type', property_type);
+        formData.append('property_other_type', property_other_type);
 
         if (property_media1 instanceof File) {
             console.log('Property Media 1:', property_media1);
@@ -128,8 +128,8 @@ function AddPropertyForm() {
                 <input
                     type="text"
                     placeholder="Property Type"
-                    value={property_type}
-                    onChange={(e) => setPropertyType(e.target.value)}
+                    value={property_other_type}
+                    onChange={(e) => setOtherPropertyType(e.target.value)}
                     className={styles.input}
                 /><br />
 
@@ -235,4 +235,4 @@ function AddPropertyForm() {
     )
 }
 
-export default AddPropertyForm
+export default AddPropertyForm;
