@@ -42,3 +42,20 @@
   margin: 10px;
   height: 30vh;
 }
+
+.submitButton {
+  background-color: #1C1B64;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  /* Add a pointer cursor to the button */
+}
+
+
+.fileInputLabel {
+  color: black;
+  font-size: 10px;
+  margin: 10px;
+}

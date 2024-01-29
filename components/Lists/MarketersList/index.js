@@ -26,8 +26,12 @@ const table_column_heading = [
     },
 
     {
-        key: "employee_contract",
-        heading: "Employee Contract",
+        key: "employee_contact",
+        heading: "Employee Contact",
+    },
+    {
+        key: "employee_email",
+        heading: "Employee Email",
     },
     {
         key: "no_of_followup",
@@ -37,10 +41,6 @@ const table_column_heading = [
     {
         key: "no_of_wons",
         heading: "Number of Wons",
-    },
-    {
-        key: "rating",
-        heading: "Ratings",
     },
     {
         key: "view-btn",
@@ -169,10 +169,10 @@ const MarketersList = () => {
                     id: item.id,
                     employee_id: item.id,
                     employee_name: item.name,
-                    employee_contract: item.address,
+                    employee_contact: item.address,
+                    employee_email: item.address,
                     no_of_followup: item.description,
                     no_of_wons: item.status,
-                    rating: item.value,
                     "view-btn": {
                         component: () => (
                             <ActionButton
