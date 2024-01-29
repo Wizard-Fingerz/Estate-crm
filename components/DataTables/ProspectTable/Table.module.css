@@ -5,6 +5,7 @@
     padding: 10px 0;
     border-radius: 10px;
     border: 1px solid rgb(211, 211, 211);
+    color: #0b0b29;
     margin: 20px;
     box-shadow: 0 4px 8px rgba(138, 43, 226, 0.1);
 
@@ -24,6 +25,7 @@
     width: 100%;
     overflow: auto;
     height: 400px;
+    color: #0b0b29;
 }
 
 .table {
@@ -31,6 +33,7 @@
     border-collapse: collapse;
     background: #fff;
     text-align: left;
+    color: #0b0b29;
 }
 
 .table th {
@@ -41,24 +44,29 @@
 
 .table tr {
     border-top: 1px solid rgb(211, 211, 211);
+    color: #0b0b29;
 }
 
 .table td,
 .table th {
     padding: 10px;
+    color: #0b0b29;
 }
 
 .table tr td:nth-of-type(1) {
     font-weight: bold;
+    color: #0b0b29;
 }
 
 .table tr td:not(:nth-of-type(1)) {
-    color: gray;
+    /* color: gray; */
+    color: #0b0b29;
 }
 
 .table tr td span {
     display: inline-block;
 
+    color: #0b0b29;
 }
 
 .table tr td span:nth-of-type(1)>svg {
@@ -66,17 +74,20 @@
     margin-right: 5px;
     position: relative;
     top: 5px;
+    color: #0b0b29;
 }
 
 .table tr th span:nth-of-type(2) {
     position: relative;
     top: 2px;
+    color: #0b0b29;
 }
 
 /* Existing styles */
 
 .table-container {
     position: relative;
+    color: #0b0b29;
 }
 
 .table-fixed-header {
@@ -84,6 +95,7 @@
     top: 0;
     background-color: white;
     /* z-index: 1; */
+    color: #0b0b29;
 }
 
 /* Additional styles for fixed table header */
@@ -94,4 +106,5 @@
     max-height: 400px;
     background-color: white;
     /* z-index: 2; */
+    color: #0b0b29;
 }

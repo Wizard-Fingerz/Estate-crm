@@ -8,11 +8,11 @@ import {
     FaTrash,
     FaEdit,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddMarketerForm from "../../Form/AddMarketerForm";
 import EditMarketerForm from "../../Form/EditMarketerForm";
-import MarketerTable from "../../DataTables/MarketerTable";
+import Table from "../../DataTables/Table";
 
 const table_column_heading = [
     {
@@ -58,36 +58,44 @@ const table_column_heading = [
     },
 ];
 
-const table_data = [
-    {
-        id: 1,
-        employee_id: {
-            value: "1",
-        },
-        employee_name: {
-            value: "Hassan Uril",
-        },
-        employee_contract: {
-            value: "+23470773473843",
-        },
-        no_of_followup: {
-            value: "20",
-        },
-        no_of_wons: {
-            value: "23",
-        },
-        rating: {
-            value: "5.0",
-        },
 
-    },
-]
 const MarketersList = () => {
+    const [tableData, setTableData] = useState([]);
     const [addMarketerModal, setAddMarketerModal] = useState(false);
     const [downloadMarketerModal, setDownloadMarketerModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Token not found in local storage');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/property/marketers/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data);
+                setTableData(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
     const openViewModal = () => {
         setViewModal(true);
@@ -137,7 +145,7 @@ const MarketersList = () => {
 
     return (
         <>
-            <MarketerTable
+            <Table
                 headingRightItem1={() => (
                     <ActionButton
                         onClick={openAddMarketerModal}
@@ -157,8 +165,14 @@ const MarketersList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={table_data.map((item) => ({
-                    ...item,
+                data={tableData.map((item) => ({
+                    id: item.id,
+                    employee_id: item.id,
+                    employee_name: item.name,
+                    employee_contract: item.address,
+                    no_of_followup: item.description,
+                    no_of_wons: item.status,
+                    rating: item.value,
                     "view-btn": {
                         component: () => (
                             <ActionButton

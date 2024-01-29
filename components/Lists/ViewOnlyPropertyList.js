@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "../sample_components/ui-components/Modal";
-import PropertyTable from "../DataTables/PropertyTable";
+import PropertyTable from "../DataTables/Table";
 
 const table_column_heading = [
     {

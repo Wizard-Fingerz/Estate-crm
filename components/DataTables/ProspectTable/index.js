@@ -17,11 +17,10 @@ const PropertyTable = ({
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 30;
     const [activeButton, setActiveButton] = useState("All"); // State to store the label of the currently active button
-    const productCategories = [
+    const prospectCategories = [
         { label: 'All' },
-        { label: 'Electronics' },
-        { label: 'Fashion and Beauty' },
-        { label: 'Home and Kitchen' },
+        { label: 'Closed Won' },
+        { label: 'Closed Lost' },
         // Add more product categories as needed
     ];
     const handleCategoryChange = (category) => {
@@ -38,19 +37,17 @@ const PropertyTable = ({
             ? data.filter((item) =>
                 Object.values(item).some(
                     (value) =>
-                        typeof value === "object" &&
-                        value?.value?.toLowerCase?.().includes(searchQuery.toLowerCase())
+                        typeof value === "string" && value.toLowerCase().includes(searchQuery.toLowerCase())
                 )
             )
-            : data.filter(
-                (item) =>
-                    item["product_category"].value === selectedCategory &&
-                    Object.values(item).some(
-                        (value) =>
-                            typeof value === "object" &&
-                            value?.value?.toLowerCase?.().includes(searchQuery.toLowerCase())
-                    )
+            : data.filter((item) =>
+                item["status"] && item["status"].value === selectedCategory &&
+                Object.values(item).some(
+                    (value) =>
+                        typeof value === "string" && value.toLowerCase().includes(searchQuery.toLowerCase())
+                )
             );
+
     // Calculate total pages and update filteredData based on current page and itemsPerPage
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -83,6 +80,15 @@ const PropertyTable = ({
     const handleLastPage = () => {
         handlePageChange(totalPages);
     };
+    console.log('Search Query:', searchQuery);
+    console.log('Selected Category:', selectedCategory);
+    console.log('Data:', data);
+
+    console.log('Filtered Data:', filteredData);
+
+    console.log('Heading:', heading);
+    console.log('Current Items:', currentItems);
+
 
     return (
         <div style={{ marginTop: '50px' }}>
@@ -91,7 +97,7 @@ const PropertyTable = ({
                     <div>
                         <div>
                             <Section>
-                                {productCategories.map((category) => (
+                                {prospectCategories.map((category) => (
                                     <ActionButton
                                         key={category.label}
                                         label={category.label}
@@ -130,6 +136,7 @@ const PropertyTable = ({
                     {headingRightItem1()}
                     {headingRightItem2()}
                 </div>
+
                 <div className={styles["table-wrapper"]} style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <table className={styles["table"]}>
                         <thead className={styles["fixed-header-wrapper"]}>
@@ -150,25 +157,21 @@ const PropertyTable = ({
                                 ))}
                             </tr>
                         </thead>
-                        <tbody>
-                            {currentItems.map((tr) => (
-                                <tr key={tr.id}>
-                                    {heading.map((th, i) => (
-                                        <td key={i}>
-                                            {tr[th.key].component ? (
-                                                tr[th.key].component()
-                                            ) : th.icon ? (
-                                                <span>
-                                                    <th.icon />
-                                                </span>
-                                            ) : (
-                                                tr[th.key].value
-                                            )}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
+                        {currentItems.map((tr) => (
+                            <tr key={tr.id}>
+                                {heading.map((th, i) => (
+                                    <td key={i}>
+                                        {tr[th.key] &&
+                                            typeof tr[th.key] === "object" &&
+                                            tr[th.key].component
+                                            ? tr[th.key].component()
+                                            : tr[th.key]}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+
+
                     </table>
                 </div>
                 {/* Pagination buttons */}

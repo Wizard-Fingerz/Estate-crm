@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Table.module.css";
 import ActionButton from "/components/sample_components/ui-components/ActionButton";
 import PaginationButton from "/components/sample_components/ui-components/PaginationButton";
@@ -12,21 +12,30 @@ const ProspectTable = ({
     heading,
     data,
 }) => {
-    const [selectedCategory, setSelectedCategory] = useState("All"); // Default to "All" category
+    const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 30;
-    const [activeButton, setActiveButton] = useState("All"); // State to store the label of the currently active button
-    const productCategories = [
-        { label: 'All' },
-        { label: 'Electronics' },
-        { label: 'Fashion and Beauty' },
-        { label: 'Home and Kitchen' },
-        // Add more product categories as needed
-    ];
+    const [activeButton, setActiveButton] = useState("All");
+
+    // Extract unique categories from data
+    // Extract unique categories from data only when data is not empty
+    const uniqueCategories = data.length > 0
+        ? [...new Set(data.map((item) => item.property_type || "Others"))]
+        : [];
+
+
+    console.log('Unique Categories:', uniqueCategories);
+    // Update state with available categories
+    const [availableCategories, setAvailableCategories] = useState(["All", ...uniqueCategories]);
+
+    useEffect(() => {
+        setAvailableCategories(["All", ...uniqueCategories]);
+    }, [data]); // Trigger the effect whenever data changes
+
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        setCurrentPage(1); // Reset to the first page when changing category
+        setCurrentPage(1);
     };
 
     const handleButtonClick = (category) => {
@@ -38,19 +47,18 @@ const ProspectTable = ({
             ? data.filter((item) =>
                 Object.values(item).some(
                     (value) =>
-                        typeof value === "object" &&
-                        value?.value?.toLowerCase?.().includes(searchQuery.toLowerCase())
+                        typeof value === "string" && value.toLowerCase().includes(searchQuery.toLowerCase())
                 )
             )
-            : data.filter(
-                (item) =>
-                    item["product_category"].value === selectedCategory &&
-                    Object.values(item).some(
-                        (value) =>
-                            typeof value === "object" &&
-                            value?.value?.toLowerCase?.().includes(searchQuery.toLowerCase())
-                    )
+            : data.filter((item) =>
+                item.property_type && item.property_type === selectedCategory &&
+                Object.values(item).some(
+                    (value) =>
+                        typeof value === "string" && value.toLowerCase().includes(searchQuery.toLowerCase())
+                )
             );
+
+
     // Calculate total pages and update filteredData based on current page and itemsPerPage
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -91,19 +99,20 @@ const ProspectTable = ({
                     <div>
                         <div>
                             <Section>
-                                {productCategories.map((category) => (
+                                {availableCategories.map((category) => (
                                     <ActionButton
-                                        key={category.label}
-                                        label={category.label}
-                                        isActive={activeButton === category.label}
+                                        key={category}
+                                        label={category}
+                                        isActive={activeButton === category}
                                         inverse={true}
                                         onClick={() => {
-                                            handleCategoryChange(category.label);
-                                            handleButtonClick(category.label);
+                                            handleCategoryChange(category);
+                                            handleButtonClick(category);
                                         }}
                                         style={{ margin: '5px' }}
                                     />
                                 ))}
+
                             </Section>
                         </div>
                     </div>
@@ -150,25 +159,19 @@ const ProspectTable = ({
                                 ))}
                             </tr>
                         </thead>
-                        <tbody className={styles.tbody}>
-                            {currentItems.map((tr) => (
-                                <tr key={tr.id}>
-                                    {heading.map((th, i) => (
-                                        <td key={i}>
-                                            {tr[th.key].component ? (
-                                                tr[th.key].component()
-                                            ) : th.icon ? (
-                                                <span>
-                                                    <th.icon />
-                                                </span>
-                                            ) : (
-                                                tr[th.key].value
-                                            )}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
+                        {currentItems.map((tr) => (
+                            <tr key={tr.id}>
+                                {heading.map((th, i) => (
+                                    <td key={i}>
+                                        {tr[th.key] &&
+                                            typeof tr[th.key] === "object" &&
+                                            tr[th.key].component
+                                            ? tr[th.key].component()
+                                            : tr[th.key]}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
                     </table>
                 </div>
                 {/* Pagination buttons */}

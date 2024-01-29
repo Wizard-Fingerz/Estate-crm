@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import EditPropertyForm from "../../Form/EditPropertyForm";
 import AddPropertyForm from "../../Form/AddPropertyForm";
-import PropertyTable from "../../DataTables/PropertyTable";
+import Table from "../../DataTables/Table";
 
 const table_column_heading = [
     {
@@ -147,8 +147,7 @@ const PropertyList = () => {
 
     return (
         <>
-
-            <PropertyTable
+            <Table
                 headingRightItem1={() => (
                     <ActionButton
                         onClick={openAddPropertyModal}
@@ -156,7 +155,6 @@ const PropertyList = () => {
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
-
                 )}
                 headingRightItem2={() => (
                     <ActionButton

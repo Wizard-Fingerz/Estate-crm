@@ -64,7 +64,7 @@ function AddMarketerForm() {
                 /><br />
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Staff Id"
                     value={username}
                     onChange={(e) => setMarketerUsername(e.target.value)}
                     className={styles.input}

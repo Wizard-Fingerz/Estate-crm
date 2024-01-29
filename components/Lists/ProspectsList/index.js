@@ -8,11 +8,11 @@ import {
     FaTrash,
     FaEdit,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
 import EditProspectForm from "../../Form/EditProspectForm";
-import ProspectTable from "../../DataTables/ProspectTable";
+import Table from "../../DataTables/Table";
 
 const table_column_heading = [
     {
@@ -36,7 +36,11 @@ const table_column_heading = [
 
     {
         key: "whatsapp_number",
-        heading: "WhatsApp Numberr",
+        heading: "WhatsApp Number",
+    },
+    {
+        key: "status",
+        heading: "Status",
     },
     {
         key: "view-btn",
@@ -54,33 +58,52 @@ const table_column_heading = [
     },
 ];
 
-const table_data = [
-    {
-        id: 1,
-        name: {
-            value: "Tokyo Hassan",
-        },
-        address: {
-            value: "Lagos, Nigeria",
-        },
-        email: {
-            value: "tokyo@gmail.com",
-        },
-        phone_number: {
-            value: "+234902343434",
-        },
-
-        whatsapp_number: {
-            value: "+234902343434",
-        },
-    },
-]
 const ProspectsList = () => {
+    const [prospectData, setProspectData] = useState([]);
     const [addProspectModal, setAddProspectModal] = useState(false);
     const [downloadProspectModal, setDownloadProspectModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Token not found in local storage');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/property/prospects/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                    },
+                });
+                const data = await response.json();
+
+                // Update state using the callback function
+                setProspectData((prevProspectData) => {
+                    console.log('Prospect Data:', data);
+                    return data;
+                });
+                // Inside ProspectsList component
+                console.log('Prospect Data in ProspectsList:', prospectData);
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Log the updated state after it is set by the effect
+    useEffect(() => {
+        console.log('Prospect Data in ProspectsList:', prospectData);
+    }, [prospectData]);
 
     const openViewModal = () => {
         setViewModal(true);
@@ -126,69 +149,78 @@ const ProspectsList = () => {
         //alert('closing');
         setModal(false);
     };
+    console.log('Prospect Data before mapping2:', prospectData);
+
 
     return (
         <>
 
-            <ProspectTable
-                headingRightItem1={() => (
-                    <ActionButton
-                        onClick={openAddProspectModal}
-                        label="Add Prospect"
-                        // Icon={FaCloudDownloadAlt}
-                        style={{ margin: '0 19px', }}
-                    />
+                <Table
+                    headingRightItem1={() => (
+                        <ActionButton
+                            onClick={openAddProspectModal}
+                            label="Add Prospect"
+                            // Icon={FaCloudDownloadAlt}
+                            style={{ margin: '0 19px', }}
+                        />
 
-                )}
-                headingRightItem2={() => (
-                    <ActionButton
-                        onClick={openDownloadProspectModal}
-                        label="Download All"
-                        // Icon={FaCloudDownloadAlt}
-                        style={{ margin: '0 19px', }}
-                    />
+                    )}
+                    headingRightItem2={() => (
+                        <ActionButton
+                            onClick={openDownloadProspectModal}
+                            label="Download All"
+                            // Icon={FaCloudDownloadAlt}
+                            style={{ margin: '0 19px', }}
+                        />
 
-                )}
-                heading={table_column_heading}
-                data={table_data.map((item) => ({
-                    ...item,
-                    "view-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="View"
-                                Icon={FaEye}
-                                inverse={true}
-                                onClick={openViewModal}
-                                style={{ color: 'blue', borderColor: 'blue' }}
-                            />
-                        ),
-                    },
-                    "edit-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="Edit"
-                                Icon={FaEdit}
-                                inverse={true}
-                                onClick={openEditModal}
-                                style={{ color: 'green', borderColor: 'green' }}
-                            />
-                        ),
-                    },
-                    "delete-btn": {
-                        component: () => (
-                            <ActionButton
-                                label="Delete"
-                                Icon={FaTrash}
-                                inverse={true}
-                                onClick={openDeleteModal}
-                                style={{ color: 'red', borderColor: 'red' }}
-                            />
-                        ),
-                    },
-                }))}
-
-            />
-
+                    )}
+                    heading={table_column_heading}
+                    // Change the mapping in the 'ProspectTable' component
+                    data={prospectData.map((item) => ({
+                        id: item.id,
+                        name: item.full_name,
+                        address: item.address,
+                        email: item.email,
+                        phone_number: item.phone_number,
+                        whatsapp_number: item.whatsapp_number,
+                        status: item.status,
+                        "view-btn": {
+                            component: () => (
+                                <ActionButton
+                                    label="View"
+                                    Icon={FaEye}
+                                    inverse={true}
+                                    onClick={openViewModal}
+                                    style={{ color: 'blue', borderColor: 'blue' }}
+                                />
+                            ),
+                        },
+                        "edit-btn": {
+                            component: () => (
+                                <ActionButton
+                                    label="Edit"
+                                    Icon={FaEdit}
+                                    inverse={true}
+                                    onClick={openEditModal}
+                                    style={{ color: 'green', borderColor: 'green' }}
+                                />
+                            ),
+                        },
+                        "delete-btn": {
+                            component: () => (
+                                <ActionButton
+                                    label="Delete"
+                                    Icon={FaTrash}
+                                    inverse={true}
+                                    onClick={openDeleteModal}
+                                    style={{ color: 'red', borderColor: 'red' }}
+                                />
+                            ),
+                        },
+                    }))}
+                                                         
+                />
+            
             <Modal
                 isOpen={addProspectModal}
                 heading={"Add Prospect"}
