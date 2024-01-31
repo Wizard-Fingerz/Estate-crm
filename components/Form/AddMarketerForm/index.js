@@ -6,8 +6,10 @@ import { React, useState, useEffect } from 'react'
 
 function AddMarketerForm() {
     const [full_name, setMarketerFullName] = useState('');
+    const [first_name, last_name] = full_name.split(' ');
     const [username, setMarketerUsername] = useState('');
     const [email, setMarketerEmail] = useState('');
+    const [contact, setMarketerContact] = useState('');
     const [marketer_media1, setMarketerMedia1] = useState('');
     const [marketer_media2, setMarketerMedia2] = useState('');
     const [media1FileName, setMedia1FileName] = useState('');
@@ -50,14 +52,11 @@ function AddMarketerForm() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('prospect_prefix', prospect_prefix);
-        formData.append('prospect_name', prospect_name);
-        formData.append('prospect_address', prospect_address);
-        formData.append('prospect_email', prospect_email);
-        formData.append('prospect_phone_number', prospect_phone_number);
-        formData.append('prospect_whatsapp_phone_number', prospect_whatsapp_phone_number);
-        formData.append('property', property);
-        formData.append('marketer', marketer);
+        formData.append('first_name', first_name);
+        formData.append('last_name', last_name);
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('contact', contact);
 
         if (marketer_media1 instanceof File) {
             console.log('Markter Media 1:', marketer_media1);
@@ -138,10 +137,10 @@ function AddMarketerForm() {
                     className={styles.input}
                 /><br />
                 <input
-                    type="text"
+                    type="tel"
                     placeholder="Contact"
-                    value={email}
-                    onChange={(e) => setMarketerEmail(e.target.value)}
+                    value={contact}
+                    onChange={(e) => setMarketerContact(e.target.value)}
                     className={styles.input}
                 /><br/>
 

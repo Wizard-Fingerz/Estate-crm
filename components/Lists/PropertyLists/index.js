@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import EditPropertyForm from "../../Form/EditPropertyForm";
 import AddPropertyForm from "../../Form/AddPropertyForm";
+import ViewPropertyDetails from "../../Form/ViewPropertyDetails";
 import Table from "../../DataTables/Table";
 
 const table_column_heading = [
@@ -66,6 +67,7 @@ const PropertyList = () => {
     const [addPropertyModal, setAddPropertyModal] = useState(false);
     const [downloadPropertyModal, setDownloadPropertyModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
+    const [viewModalData, setViewModalData] = useState(null);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
@@ -99,9 +101,12 @@ const PropertyList = () => {
         fetchData();
     }, []);
 
-    const openViewModal = () => {
+    const openViewModal = (propertyId) => {
+        const selectedProperty = tableData.find(item => item.id === propertyId);
+        setViewModalData(selectedProperty);
         setViewModal(true);
     };
+
 
     const closeViewModal = () => {
         setViewModal(false);
@@ -209,7 +214,7 @@ const PropertyList = () => {
                         ),
                     },
                 }))}
-                
+
             />
             <Modal
                 isOpen={addPropertyModal}
@@ -237,11 +242,7 @@ const PropertyList = () => {
                 heading={"View Property"}
                 onClose={closeViewModal}
             >
-                {/* Add your components for viewing property details */}
-                {/* For example: */}
-                <div>
-                    <p>Property details go here.</p>
-                </div>
+                {viewModalData && <ViewPropertyDetails propertyData={viewModalData} />}
             </Modal>
 
             <Modal

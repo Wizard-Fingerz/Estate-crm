@@ -1,5 +1,4 @@
 import ActionButton from "../../sample_components/ui-components/ActionButton";
-
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -10,37 +9,33 @@ import {
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
-import AddMarketerForm from "../../Form/AddMarketerForm";
-import EditMarketerForm from "../../Form/EditMarketerForm";
+import EditCustomerForm from "../../Form/EditCustomerForm";
+import ConversionForm from "../../Form/ConversionForm";
 import Table from "../../DataTables/Table";
 
 const table_column_heading = [
     {
-        key: "employee_id",
-        heading: "Employee ID",
+        key: "name",
+        heading: "Name",
     },
     {
-        key: "employee_name",
-        heading: "Employee Name",
+        key: "address",
+        heading: "Address",
         // icon: FaLongArrowAltDown,
     },
 
     {
-        key: "employee_contact",
-        heading: "Employee Contact",
+        key: "email",
+        heading: "Email",
     },
     {
-        key: "employee_email",
-        heading: "Employee Email",
-    },
-    {
-        key: "no_of_followup",
-        heading: "Number of Follow-ups",
+        key: "phone_number",
+        heading: "Phone Number",
     },
 
     {
-        key: "no_of_wons",
-        heading: "Number of Wons",
+        key: "whatsapp_number",
+        heading: "WhatsApp Numberr",
     },
     {
         key: "view-btn",
@@ -59,18 +54,16 @@ const table_column_heading = [
 ];
 
 
-const MarketersList = () => {
-    const [tableData, setTableData] = useState([]);
-    const [addMarketerModal, setAddMarketerModal] = useState(false);
-    const [downloadMarketerModal, setDownloadMarketerModal] = useState(false);
+const CustomersList = () => {
+    const [customerData, setCustomerData] = useState([]);
+    const [addCustomerModal, setAddCustomerModal] = useState(false);
+    const [downloadCustomerModal, setDownloadCustomerModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
-
-
             const token = localStorage.getItem('token');
 
             if (!token) {
@@ -79,15 +72,22 @@ const MarketersList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/marketers/', {
+                const response = await fetch('http://127.0.0.1:8000/property/Customers/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
                     },
                 });
                 const data = await response.json();
-                console.log(data);
-                setTableData(data);
+
+                // Update state using the callback function
+                setCustomerData((prevCustomerData) => {
+                    console.log('Customer Data:', data);
+                    return data;
+                });
+                // Inside CustomersList component
+                console.log('Customer Data in CustomersList:', customerData);
+
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -96,6 +96,10 @@ const MarketersList = () => {
         fetchData();
     }, []);
 
+    // Log the updated state after it is set by the effect
+    useEffect(() => {
+        console.log('Customer Data in CustomersList:', customerData);
+    }, [customerData]);
 
     const openViewModal = () => {
         setViewModal(true);
@@ -120,21 +124,20 @@ const MarketersList = () => {
     const closeDeleteModal = () => {
         setDeleteModal(false);
     };
-
-    const closeAddMarketerModal = () => {
-        setAddMarketerModal(false);
+    const closeAddCustomerModal = () => {
+        setAddCustomerModal(false);
     };
 
-    const openAddMarketerModal = () => {
-        setAddMarketerModal(true);
+    const openAddCustomerModal = () => {
+        setAddCustomerModal(true);
     };
 
-    const closeDownloadMarketerModal = () => {
-        setDownloadMarketerModal(false);
+    const closeDownloadCustomerModal = () => {
+        setDownloadCustomerModal(false);
     };
 
-    const openDownloadMarketerModal = () => {
-        setDownloadMarketerModal(true);
+    const openDownloadCustomerModal = () => {
+        setDownloadCustomerModal(true);
     };
 
     const [modal, setModal] = useState(false);
@@ -142,14 +145,14 @@ const MarketersList = () => {
         //alert('closing');
         setModal(false);
     };
-
     return (
         <>
+
             <Table
                 headingRightItem1={() => (
                     <ActionButton
-                        onClick={openAddMarketerModal}
-                        label="Add Marketer"
+                        onClick={openAddCustomerModal}
+                        label="Add Customer"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
@@ -157,7 +160,7 @@ const MarketersList = () => {
                 )}
                 headingRightItem2={() => (
                     <ActionButton
-                        onClick={openDownloadMarketerModal}
+                        onClick={openDownloadCustomerModal}
                         label="Download All"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
@@ -165,14 +168,14 @@ const MarketersList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={tableData.map((item) => ({
+                data={customerData.map((item) => ({
                     id: item.id,
-                    employee_id: item.username,
-                    employee_name: `${item.first_name} ${item.last_name}`,
-                    employee_contact: item.contact,
-                    employee_email: item.email,
-                    no_of_followup: item.description,
-                    no_of_wons: item.status,
+                    name: item.full_name,
+                    address: item.address,
+                    email: item.email,
+                    phone_number: item.phone_number,
+                    whatsapp_number: item.whatsapp_number,
+                    status: item.status,
                     "view-btn": {
                         component: () => (
                             <ActionButton
@@ -210,29 +213,26 @@ const MarketersList = () => {
 
             />
             <Modal
-                isOpen={addMarketerModal}
-                heading={"Add Marketer"}
-                onClose={closeAddMarketerModal}
+                isOpen={addCustomerModal}
+                heading={"Add Prospect"}
+                onClose={closeAddCustomerModal}
             >
-                <AddMarketerForm />
+                <ConversionForm />
                 {/* Add your form or components for adding property */}
                 {/* For example: */}
-                {/* <AddMarketerForm onSubmit={handleAddProperty} /> */}
+                {/* <AddPropertyForm onSubmit={handleAddProperty} /> */}
             </Modal>
 
             <Modal
-                isOpen={downloadMarketerModal}
-                heading={"Download All Business Details"}
-                onClose={closeDownloadMarketerModal}
-            >
-                {/* Add your components for downloading property details */}
-                {/* For example: */}
-                {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
-            </Modal>
-
+                isOpen={modal}
+                heading={"Download all business details"}
+                onClose={handleClose}
+                positiveText={'Download'}
+                negativeText={'Cancel'}
+            />
             <Modal
                 isOpen={viewModal}
-                heading={"View Marketer"}
+                heading={"View Customer"}
                 onClose={closeViewModal}
             >
                 {/* Add your components for viewing property details */}
@@ -244,17 +244,17 @@ const MarketersList = () => {
 
             <Modal
                 isOpen={editModal}
-                heading={"Edit Marketer"}
+                heading={"Edit Customer"}
                 onClose={closeEditModal}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditMarketerForm />
+                <EditCustomerForm />
             </Modal>
 
             <Modal
                 isOpen={deleteModal}
-                heading={"Delete Marketer"}
+                heading={"Delete Customer"}
                 onClose={closeDeleteModal}
             >
                 {/* Add your components for deleting property details */}
@@ -273,9 +273,8 @@ const MarketersList = () => {
                     />
                 </div>
             </Modal>
-
         </>
     );
 };
 
-export default MarketersList;
+export default CustomersList;

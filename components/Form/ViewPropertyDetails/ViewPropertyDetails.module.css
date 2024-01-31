@@ -1,0 +1,36 @@
+.container {
+    color: black;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.media {
+    width: 200px;
+    height: 230px;
+    margin: 10px;
+}
+
+.mediaContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.propertyName {
+    font-family: Inter;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.textContainer * {
+    margin: 20px;
+}
