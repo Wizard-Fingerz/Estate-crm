@@ -15,10 +15,7 @@ import ViewPropertyDetails from "../../Form/ViewPropertyDetails";
 import Table from "../../DataTables/Table";
 
 const table_column_heading = [
-    {
-        key: "reference_id",
-        heading: "Reference ID",
-    },
+    
     {
         key: "property_name",
         heading: "Property Name",
@@ -69,7 +66,10 @@ const PropertyList = () => {
     const [viewModal, setViewModal] = useState(false);
     const [viewModalData, setViewModalData] = useState(null);
     const [editModal, setEditModal] = useState(false);
+    const [editModalData, setEditModalData] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [deleteModalData, setDeleteModalData] = useState(null);
+
 
 
     useEffect(() => {
@@ -110,26 +110,40 @@ const PropertyList = () => {
 
     const closeViewModal = () => {
         setViewModal(false);
+        window.location.reload();
     };
 
-    const openEditModal = () => {
+
+    const openEditModal = (propertyId) => {
+        const selectedProperty = tableData.find(item => item.id === propertyId);
+        setEditModalData(selectedProperty);
         setEditModal(true);
     };
 
+
     const closeEditModal = () => {
         setEditModal(false);
+        window.location.reload();
     };
 
-    const openDeleteModal = () => {
+    const openDeleteModal = (propertyId) => {
+        const selectedProperty = tableData.find(item => item.id === propertyId);
+        setDeleteModalData(selectedProperty);
         setDeleteModal(true);
     };
 
     const closeDeleteModal = () => {
         setDeleteModal(false);
+        // Reset the deleteModalData state when the modal is closed
+        setDeleteModalData(null);
+        // Refresh the page after closing the modal
+        window.location.reload();
     };
+
 
     const closeAddPropertyModal = () => {
         setAddPropertyModal(false);
+        window.location.reload();
     };
 
     const openAddPropertyModal = () => {
@@ -138,11 +152,44 @@ const PropertyList = () => {
 
     const closeDownloadPropertyModal = () => {
         setDownloadPropertyModal(false);
+        window.location.reload();
     };
 
     const openDownloadPropertyModal = () => {
         setDownloadPropertyModal(true);
     };
+
+    const deleteProperty = async (propertyId) => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/property/delete-properties/${propertyId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                console.log('Property deleted successfully!');
+                // Handle success, you may want to fetch the updated data and update the table
+                fetchData();
+            } else {
+                console.error('Failed to delete property');
+                // Handle error, show an error message
+                alert('Failed to delete property!');
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            // Handle network error
+        }
+    };
+
 
     const [modal, setModal] = useState(false);
     const handleClose = () => {
@@ -173,7 +220,6 @@ const PropertyList = () => {
                 heading={table_column_heading}
                 data={tableData.map((item) => ({
                     id: item.id,
-                    reference_id: item.id,
                     property_name: item.name,
                     property_address: item.address,
                     property_description: item.description,
@@ -252,7 +298,7 @@ const PropertyList = () => {
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditPropertyForm />
+                {editModalData && <EditPropertyForm propertyData={editModalData} />}
             </Modal>
 
             <Modal
@@ -263,13 +309,14 @@ const PropertyList = () => {
                 {/* Add your components for deleting property details */}
                 {/* For example: */}
                 <div>
-                    <p>Are you sure you want to delete this property?</p>
+                    <p style={{ color: 'black', marginBottom: '30px' }}>Are you sure you want to delete this property?</p>
                     <ActionButton
                         label="Delete"
                         Icon={FaTrash}
                         inverse={true}
                         onClick={() => {
                             // Handle delete action here
+                            deleteProperty(deleteModalData.id);
                             closeDeleteModal();
                         }}
                         style={{ color: 'red', borderColor: 'red' }}

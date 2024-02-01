@@ -64,8 +64,11 @@ const MarketersList = () => {
     const [addMarketerModal, setAddMarketerModal] = useState(false);
     const [downloadMarketerModal, setDownloadMarketerModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
+    const [viewModalData, setViewModalData] = useState(null);
     const [editModal, setEditModal] = useState(false);
+    const [editModalData, setEditModalData] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [deleteModalData, setDeleteModalData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -97,32 +100,48 @@ const MarketersList = () => {
     }, []);
 
 
-    const openViewModal = () => {
+    const openViewModal = (marketerId) => {
+        const selectedMarketer = tableData.find(item => item.id === marketerId);
+        setViewModalData(selectedMarketer);
         setViewModal(true);
     };
 
     const closeViewModal = () => {
         setViewModal(false);
+        window.location.reload();
     };
 
-    const openEditModal = () => {
+
+    const openEditModal = (marketerId) => {
+        const selectedMarketer = tableData.find(item => item.id === marketerId);
+        setEditModalData(selectedMarketer);
         setEditModal(true);
     };
 
+
     const closeEditModal = () => {
         setEditModal(false);
+        window.location.reload();
     };
 
-    const openDeleteModal = () => {
+    const openDeleteModal = (marketerId) => {
+        const selectedMarketer = tableData.find(item => item.id === marketerId);
+        setDeleteModalData(selectedMarketer);
         setDeleteModal(true);
     };
 
+
     const closeDeleteModal = () => {
         setDeleteModal(false);
+        // Reset the deleteModalData state when the modal is closed
+        setDeleteModalData(null);
+        // Refresh the page after closing the modal
+        window.location.reload();
     };
 
     const closeAddMarketerModal = () => {
         setAddMarketerModal(false);
+        window.location.reload();
     };
 
     const openAddMarketerModal = () => {
@@ -131,6 +150,7 @@ const MarketersList = () => {
 
     const closeDownloadMarketerModal = () => {
         setDownloadMarketerModal(false);
+        window.location.reload();
     };
 
     const openDownloadMarketerModal = () => {
@@ -142,6 +162,38 @@ const MarketersList = () => {
         //alert('closing');
         setModal(false);
     };
+
+    const deleteMarketer = async (marketerId) => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/delete-marketers/${marketerId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                console.log('Marketer deleted successfully!');
+                // Handle success, you may want to fetch the updated data and update the table
+                fetchData();
+            } else {
+                console.error('Failed to delete Marketer');
+                // Handle error, show an error message
+                alert('Failed to delete Marketer!');
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            // Handle network error
+        }
+    };
+
 
     return (
         <>
@@ -179,7 +231,8 @@ const MarketersList = () => {
                                 label="View"
                                 Icon={FaEye}
                                 inverse={true}
-                                onClick={openViewModal}
+                                onClick={() => openViewModal(item.id)} // Pass item.id to the openViewModal function
+
                                 style={{ color: 'blue', borderColor: 'blue' }}
                             />
                         ),
@@ -190,7 +243,7 @@ const MarketersList = () => {
                                 label="Edit"
                                 Icon={FaEdit}
                                 inverse={true}
-                                onClick={openEditModal}
+                                onClick={() => openEditModal(item.id)}
                                 style={{ color: 'green', borderColor: 'green' }}
                             />
                         ),
@@ -201,7 +254,7 @@ const MarketersList = () => {
                                 label="Delete"
                                 Icon={FaTrash}
                                 inverse={true}
-                                onClick={openDeleteModal}
+                                onClick={() => openDeleteModal(item.id)}
                                 style={{ color: 'red', borderColor: 'red' }}
                             />
                         ),
@@ -237,9 +290,8 @@ const MarketersList = () => {
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
-                <div>
-                    <p>Property details go here.</p>
-                </div>
+                {viewModalData && <ViewMarketerDetails marketerData={viewModalData} />}
+
             </Modal>
 
             <Modal
@@ -249,7 +301,7 @@ const MarketersList = () => {
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditMarketerForm />
+                {editModalData && <EditMarketerForm marketerData={editModalData} />}
             </Modal>
 
             <Modal
@@ -260,13 +312,14 @@ const MarketersList = () => {
                 {/* Add your components for deleting property details */}
                 {/* For example: */}
                 <div>
-                    <p>Are you sure you want to delete this property?</p>
+                    <p style={{ color: 'black', marginBottom: '30px' }}>Are you sure you want to delete this property?</p>
                     <ActionButton
                         label="Delete"
                         Icon={FaTrash}
                         inverse={true}
                         onClick={() => {
                             // Handle delete action here
+                            deleteMarketer(deleteModalData.id);
                             closeDeleteModal();
                         }}
                         style={{ color: 'red', borderColor: 'red' }}
