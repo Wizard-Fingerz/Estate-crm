@@ -74,15 +74,15 @@ function EditMarketerForm({ marketerData }) {
         formData.append('contact', contact);
 
         if (marketer_media1 instanceof File) {
-            console.log('Markter Media 1:', marketer_media1);
+            console.log('Marketer Media 1:', marketer_media1);
 
-            formData.append('property_media1', marketer_media1, marketer_media1.name);
+            formData.append('cover_picture', marketer_media1, marketer_media1.name);
         }
 
         if (marketer_media2 instanceof File) {
             console.log('Markter Media 2:', marketer_media2);
 
-            formData.append('property_media2', marketer_media2, marketer_media2.name);
+            formData.append('profile_picture', marketer_media2, marketer_media2.name);
         }
 
         const token = localStorage.getItem('token');
@@ -94,7 +94,7 @@ function EditMarketerForm({ marketerData }) {
 
         try {
             const response = await fetch('http://127.0.0.1:8000/create_marketer/', {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Authorization': `Token ${token}`,
                 },
@@ -102,18 +102,18 @@ function EditMarketerForm({ marketerData }) {
             });
 
             if (response.ok) {
-                console.log('Marketer created successfully!');
+                console.log('Marketer updated successfully!');
                 // Handle success, redirect or show a success message
 
                 // Display alert on successful submission
-                alert('Marketer submitted successfully!');
+                alert('Marketer updated successfully!');
 
             } else {
-                console.error('Failed to create Marketer');
+                console.error('Failed to update Marketer');
                 // Handle error, show an error message
 
                 // Display alert on failed submission
-                alert('Failed to create Marketer!');
+                alert('Failed to update Marketer!');
 
             }
         } catch (error) {
@@ -212,11 +212,12 @@ function EditMarketerForm({ marketerData }) {
 
 
 
+                <button type="submit" className={styles.submitButton}>Update Marketer</button>
 
 
 
             </div>
-            <div className={styles.secondForm}>
+            {/* <div className={styles.secondForm}>
                 <div className={styles.buttons}>
                     <ActionButton
                         label="Assign to Customer"
@@ -239,9 +240,8 @@ function EditMarketerForm({ marketerData }) {
                         />
                     ))}
                 </div>
-                <button type="submit" className={styles.submitButton}>Update Marketer</button>
 
-            </div>
+            </div> */}
         </form>
 
     )

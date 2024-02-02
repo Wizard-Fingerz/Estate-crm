@@ -61,13 +61,13 @@ function AddMarketerForm() {
         if (marketer_media1 instanceof File) {
             console.log('Markter Media 1:', marketer_media1);
 
-            formData.append('property_media1', marketer_media1, marketer_media1.name);
+            formData.append('cover_picture', marketer_media1, marketer_media1.name);
         }
 
         if (marketer_media2 instanceof File) {
             console.log('Markter Media 2:', marketer_media2);
 
-            formData.append('property_media2', marketer_media2, marketer_media2.name);
+            formData.append('profile_picture', marketer_media2, marketer_media2.name);
         }
 
         const token = localStorage.getItem('token');
@@ -96,9 +96,12 @@ function AddMarketerForm() {
             } else {
                 console.error('Failed to create Marketer');
                 // Handle error, show an error message
-
-                // Display alert on failed submission
-                alert('Failed to create Marketer!');
+                const errorResponse = await response.json();
+                console.log(errorResponse);
+                const errorMessage = errorResponse.detail || 'Unknown error';
+    
+                // Display alert with the error message
+                alert(`Failed to create Marketer! Error: ${errorMessage}`);
 
             }
         } catch (error) {
@@ -196,9 +199,10 @@ function AddMarketerForm() {
                 <br />
 
 
+                <button type="submit" className={styles.submitButton}>Create Marketer</button>
 
             </div>
-            <div className={styles.secondForm}>
+            {/* <div className={styles.secondForm}>
                 <div className={styles.buttons}>
                     <ActionButton
                         label="Assign to Customer"
@@ -221,9 +225,8 @@ function AddMarketerForm() {
                     ))}
                 </div>
 
-                <button type="submit" className={styles.submitButton}>Create Marketer</button>
 
-            </div>
+            </div> */}
         </form>
 
     )

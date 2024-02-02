@@ -8,10 +8,11 @@ import {
     FaTrash,
     FaEdit,
 } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useHistory } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddMarketerForm from "../../Form/AddMarketerForm";
 import EditMarketerForm from "../../Form/EditMarketerForm";
+import ViewMarketerDetails from "../../Form/ViewMarketerDetails";
 import Table from "../../DataTables/Table";
 
 const table_column_heading = [
@@ -111,6 +112,17 @@ const MarketersList = () => {
         window.location.reload();
     };
 
+    const handleViewClick = (marketerId) => {
+        // Find the selected marketer in the tableData
+        const selectedMarketer = tableData.find((item) => item.id === marketerId);
+
+        // Open the ViewMarketerDetails modal and pass the selected marketer's data
+        setViewModalData(selectedMarketer);
+        setViewModal(true);
+
+        // Navigate to the view page using window.location.href (optional)
+        window.location.href = `view-marketer/${marketerId}`;
+    };
 
     const openEditModal = (marketerId) => {
         const selectedMarketer = tableData.find(item => item.id === marketerId);
@@ -231,8 +243,7 @@ const MarketersList = () => {
                                 label="View"
                                 Icon={FaEye}
                                 inverse={true}
-                                onClick={() => openViewModal(item.id)} // Pass item.id to the openViewModal function
-
+                                onClick={() => handleViewClick(item.id)} // Pass item.id to the handleViewClick function
                                 style={{ color: 'blue', borderColor: 'blue' }}
                             />
                         ),
@@ -281,17 +292,6 @@ const MarketersList = () => {
                 {/* Add your components for downloading property details */}
                 {/* For example: */}
                 {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
-            </Modal>
-
-            <Modal
-                isOpen={viewModal}
-                heading={"View Marketer"}
-                onClose={closeViewModal}
-            >
-                {/* Add your components for viewing property details */}
-                {/* For example: */}
-                {viewModalData && <ViewMarketerDetails marketerData={viewModalData} />}
-
             </Modal>
 
             <Modal

@@ -4,7 +4,7 @@
   /* Fix the color value */
   padding: 10px;
   margin-bottom: 20px;
-  width: 20vw;
+  width: 80vw;
 }
 
 .form {
@@ -14,15 +14,15 @@
 }
 
 .firstForm {
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
 }
 
-.secondForm {
+/* .secondForm {
   border-left: 1px solid #1C1B64;
   margin: 20px;
   padding: 20px;
-}
+} */
 
 .text {
   color: black;
