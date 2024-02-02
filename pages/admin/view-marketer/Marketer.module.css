@@ -1,0 +1,10 @@
+.cover_picture{
+    width: 70vw;
+    height: 30vh;
+}
+
+.container{
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}

@@ -9,6 +9,7 @@ import {
     FaEdit,
 } from "react-icons/fa";
 import { useState, useEffect, useHistory } from "react";
+import { useRouter } from 'next/router';
 import Modal from "../../sample_components/ui-components/Modal";
 import AddMarketerForm from "../../Form/AddMarketerForm";
 import EditMarketerForm from "../../Form/EditMarketerForm";
@@ -70,6 +71,8 @@ const MarketersList = () => {
     const [editModalData, setEditModalData] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
     const [deleteModalData, setDeleteModalData] = useState(null);
+    const router = useRouter();
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -112,17 +115,26 @@ const MarketersList = () => {
         window.location.reload();
     };
 
+    // const handleViewClick = (marketerId) => {
+    //     // Find the selected marketer in the tableData
+    //     const selectedMarketer = tableData.find((item) => item.id === marketerId);
+
+    //     // Open the ViewMarketerDetails modal and pass the selected marketer's data
+    //     setViewModalData(selectedMarketer);
+    //     setViewModal(true);
+
+    //     // Navigate to the view page using window.location.href (optional)
+    //     window.location.href = `view-marketer/${marketerId}`;
+    // };
+
     const handleViewClick = (marketerId) => {
         // Find the selected marketer in the tableData
         const selectedMarketer = tableData.find((item) => item.id === marketerId);
 
-        // Open the ViewMarketerDetails modal and pass the selected marketer's data
-        setViewModalData(selectedMarketer);
-        setViewModal(true);
-
-        // Navigate to the view page using window.location.href (optional)
-        window.location.href = `view-marketer/${marketerId}`;
+        // Navigate to the "View Marketer" page with the selected marketer's data
+        router.push(`/admin/view-marketer/${marketerId}`);
     };
+
 
     const openEditModal = (marketerId) => {
         const selectedMarketer = tableData.find(item => item.id === marketerId);
