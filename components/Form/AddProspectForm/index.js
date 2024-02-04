@@ -7,8 +7,12 @@ function AddProspectForm() {
     const [prospect_name, setProspectName] = useState('');
     const [prospect_address, setProspectAddress] = useState('');
     const [prospect_email, setProspectEmail] = useState('');
-    const [prospect_phone_number, setProspectPhoneNumber] = useState('');
+    const [prospect_phone_number1, setProspectPhoneNumber1] = useState('');
+    const [prospect_phone_number2, setProspectPhoneNumber2] = useState('');
     const [prospect_whatsapp_phone_number, setProspectWhatsAppPhoneNumber] = useState('');
+    const [prospect_facebook_username, setProspectFacebookUsername] = useState('');
+    const [prospect_twitter_username, setProspectTwitterUsername] = useState('');
+    const [prospect_instagram_username, setProspectInstagramUsername] = useState('');
     const [property, setProperty] = useState('');
     const [marketer, setMarketer] = useState('');
     const [properties, setProperties] = useState([]);
@@ -85,7 +89,8 @@ function AddProspectForm() {
         formData.append('prospect_name', prospect_name);
         formData.append('prospect_address', prospect_address);
         formData.append('prospect_email', prospect_email);
-        formData.append('prospect_phone_number', prospect_phone_number);
+        formData.append('prospect_phone_number1', prospect_phone_number1);
+        formData.append('prospect_phone_number2', prospect_phone_number2);
         formData.append('prospect_whatsapp_phone_number', prospect_whatsapp_phone_number);
         formData.append('property', property);
         formData.append('marketer', marketer);
@@ -161,9 +166,16 @@ function AddProspectForm() {
                 /><br />
                 <input
                     type="text"
+                    placeholder="Phone Number1"
+                    value={prospect_phone_number1}
+                    onChange={(e) => setProspectPhoneNumber1(e.target.value)}
+                    className={styles.input}
+                /><br />
+                <input
+                    type="text"
                     placeholder="Phone Number"
-                    value={prospect_phone_number}
-                    onChange={(e) => setProspectPhoneNumber(e.target.value)}
+                    value={prospect_phone_number2}
+                    onChange={(e) => setProspectPhoneNumber2(e.target.value)}
                     className={styles.input}
                 /><br />
                 <input
@@ -179,6 +191,29 @@ function AddProspectForm() {
 
             </div>
             <div className={styles.secondForm}>
+
+                <input
+                    type="text"
+                    placeholder="Facebook Username"
+                    value={prospect_facebook_username}
+                    onChange={(e) => setProspectFacebookUsername(e.target.value)}
+                    className={styles.input}
+                /><br />
+                <input
+                    type="text"
+                    placeholder="Twitter Username"
+                    value={prospect_twitter_username}
+                    onChange={(e) => setProspectTwitterUsername(e.target.value)}
+                    className={styles.input}
+                /><br />
+                <input
+                    type="text"
+                    placeholder="Instagram Username"
+                    value={prospect_instagram_username}
+                    onChange={(e) => setProspectInstagramUsername(e.target.value)}
+                    className={styles.input}
+                /><br />
+                <textarea placeholder='Contact Source' value={prospect_}></textarea><br />
                 <select
                     value={property}
                     onChange={(e) => setProperty(e.target.value)}
@@ -205,6 +240,11 @@ function AddProspectForm() {
                     ))}
                 </select>
                 <br />
+
+
+
+
+
 
                 <button type="submit" className={styles.submitButton}>Create Prospect</button>
             </div>
