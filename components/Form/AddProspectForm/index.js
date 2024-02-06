@@ -13,6 +13,7 @@ function AddProspectForm() {
     const [prospect_facebook_username, setProspectFacebookUsername] = useState('');
     const [prospect_twitter_username, setProspectTwitterUsername] = useState('');
     const [prospect_instagram_username, setProspectInstagramUsername] = useState('');
+    const [prospect_contact_source, setProspectContactSource] = useState('');
     const [property, setProperty] = useState('');
     const [marketer, setMarketer] = useState('');
     const [properties, setProperties] = useState([]);
@@ -92,6 +93,10 @@ function AddProspectForm() {
         formData.append('prospect_phone_number1', prospect_phone_number1);
         formData.append('prospect_phone_number2', prospect_phone_number2);
         formData.append('prospect_whatsapp_phone_number', prospect_whatsapp_phone_number);
+        formData.append('prospect_facebook_username', prospect_facebook_username);
+        formData.append('prospect_twitter_username', prospect_twitter_username);
+        formData.append('prospect_instagram_username', prospect_instagram_username);
+        formData.append('prospect_contact_source', prospect_contact_source);
         formData.append('property', property);
         formData.append('marketer', marketer);
 
@@ -166,14 +171,14 @@ function AddProspectForm() {
                 /><br />
                 <input
                     type="text"
-                    placeholder="Phone Number1"
+                    placeholder="Phone Number 1"
                     value={prospect_phone_number1}
                     onChange={(e) => setProspectPhoneNumber1(e.target.value)}
                     className={styles.input}
                 /><br />
                 <input
                     type="text"
-                    placeholder="Phone Number"
+                    placeholder="Phone Number 2"
                     value={prospect_phone_number2}
                     onChange={(e) => setProspectPhoneNumber2(e.target.value)}
                     className={styles.input}
@@ -213,7 +218,9 @@ function AddProspectForm() {
                     onChange={(e) => setProspectInstagramUsername(e.target.value)}
                     className={styles.input}
                 /><br />
-                <textarea placeholder='Contact Source' value={prospect_}></textarea><br />
+                <textarea className={styles.input} placeholder='Contact Source'
+                    onChange={(e) => setProspectContactSource(e.target.value)}
+                    value={prospect_contact_source}></textarea><br />
                 <select
                     value={property}
                     onChange={(e) => setProperty(e.target.value)}

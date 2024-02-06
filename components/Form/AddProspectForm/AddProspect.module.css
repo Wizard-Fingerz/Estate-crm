@@ -1,39 +1,66 @@
 .input {
-    border-radius: 15px;
-    border: 1px solid #1C1B64;
-    /* Fix the color value */
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 20vw;
-  }
+  border-radius: 15px;
+  border: 1px solid #1C1B64;
+  /* Fix the color value */
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 20vw;
 
-  .form{
-    display: flex;
-    justify-content: space-between;
+  @media screen and (max-width: 480px) {
+    width: 100vw;
 
   }
-  .firstForm{
-    margin: 20px;
-    padding: 20px;
-  }
-  .secondForm{
-    border-left: 1px solid #1C1B64;
-    margin: 20px;
-    padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
   }
 
-  .text{
-    color:black;
-    padding-bottom: 10px;
+}
+
+.firstForm {
+  margin: 20px;
+  padding: 20px;
+
+  @media screen and (max-width: 480px) {
+
+    margin: 0px;
+    padding: 0px;
+
   }
-  
-  .submitButton {
-    background-color: #1C1B64;
-    color: white;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 15px;
-    cursor: pointer;
-    /* Add a pointer cursor to the button */
+}
+
+.secondForm {
+  border-left: 1px solid #1C1B64;
+  margin: 20px;
+  padding: 20px;
+
+  @media screen and (max-width: 480px) {
+    border-left: none;
+
+    margin: 0px;
+    padding: 0px;
+
   }
-  
+}
+
+.text {
+  color: black;
+  padding-bottom: 10px;
+}
+
+.submitButton {
+  background-color: #1C1B64;
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  cursor: pointer;
+  /* Add a pointer cursor to the button */
+}

@@ -32,10 +32,32 @@ const table_column_heading = [
         key: "phone_number",
         heading: "Phone Number",
     },
+    
+    {
+        key: "phone_number2",
+        heading: "Phone Number2",
+    },
 
     {
+
         key: "whatsapp_number",
-        heading: "WhatsApp Numberr",
+        heading: "WhatsApp Number",
+    },
+
+    
+    {
+        key: "facebook_username",
+        heading: "Facebook Username",
+    },
+    
+    {
+        key: "twitter_username",
+        heading: "Twitter Username",
+    },
+    
+    {
+        key: "instagram_username",
+        heading: "Instagram Username",
     },
     {
         key: "view-btn",
@@ -72,7 +94,7 @@ const CustomersList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/Customers/', {
+                const response = await fetch('http://127.0.0.1:8000/property/customers/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -107,6 +129,7 @@ const CustomersList = () => {
 
     const closeViewModal = () => {
         setViewModal(false);
+        window.location.reload();
     };
 
     const openEditModal = () => {
@@ -115,6 +138,7 @@ const CustomersList = () => {
 
     const closeEditModal = () => {
         setEditModal(false);
+        window.location.reload();
     };
 
     const openDeleteModal = () => {
@@ -123,9 +147,12 @@ const CustomersList = () => {
 
     const closeDeleteModal = () => {
         setDeleteModal(false);
+        window.location.reload();
     };
+
     const closeAddCustomerModal = () => {
         setAddCustomerModal(false);
+        window.location.reload();
     };
 
     const openAddCustomerModal = () => {
@@ -134,6 +161,7 @@ const CustomersList = () => {
 
     const closeDownloadCustomerModal = () => {
         setDownloadCustomerModal(false);
+        window.location.reload();
     };
 
     const openDownloadCustomerModal = () => {
@@ -145,6 +173,8 @@ const CustomersList = () => {
         //alert('closing');
         setModal(false);
     };
+
+    
     return (
         <>
 
@@ -174,6 +204,10 @@ const CustomersList = () => {
                     address: item.address,
                     email: item.email,
                     phone_number: item.phone_number,
+                    phone_number2: item.phone_number2,
+                    facebook_username: item.facebook_username,
+                    twitter_username: item.twitter_username,
+                    instagram_username: item.instagram_username,
                     whatsapp_number: item.whatsapp_number,
                     status: item.status,
                     "view-btn": {

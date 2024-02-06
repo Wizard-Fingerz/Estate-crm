@@ -53,8 +53,11 @@ const ViewMarketerDetails = ({ closeModal }) => {
     <AdminBaseLayout>
       <DashboardNav name={` ${marketerData?.username} Profile`} />
       <div className={styles.container}>
-        <img className={styles.cover_picture} src={marketerData?.cover_picture} alt="Cover Image" onError={(e) => e.target.src = '.../assets/bg_imG.png'} />
+        <img className={styles.cover_picture} src={marketerData?.cover_picture} alt="Cover Image" />
 
+        <div className={styles.profile_picture}>
+          <img className={styles.cover_picture} src={marketerData?.profile_picture} alt="Profile Image" />
+        </div>
         <p>Employee Name: {`${marketerData?.first_name} ${marketerData?.last_name}`}</p>
         <p>Employee ID: {marketerData?.username}</p>
 

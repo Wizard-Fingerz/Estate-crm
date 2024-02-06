@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import Modal from "../sample_components/ui-components/Modal";
-import ReportTable from "../DataTables/ReportTable";
+import Table from "../DataTables/Table";
 
 const table_column_heading = [
     {
@@ -105,7 +105,7 @@ const ReportList = () => {
     return (
         <>
 
-            <ReportTable
+            <Table
                 
                 headingRightItem2={() => (
                     <ActionButton

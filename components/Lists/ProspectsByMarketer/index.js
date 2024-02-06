@@ -33,14 +33,32 @@ const table_column_heading = [
         key: "phone_number",
         heading: "Phone Number",
     },
+    
+    {
+        key: "phone_number2",
+        heading: "Phone Number2",
+    },
 
     {
+
         key: "whatsapp_number",
         heading: "WhatsApp Number",
     },
+
+    
     {
-        key: "status",
-        heading: "Status",
+        key: "facebook_username",
+        heading: "Facebook Username",
+    },
+    
+    {
+        key: "twitter_username",
+        heading: "Twitter Username",
+    },
+    
+    {
+        key: "instagram_username",
+        heading: "Instagram Username",
     },
     {
         key: "view-btn",
@@ -182,8 +200,13 @@ const ProspectsByMarketer = () => {
                         address: item.address,
                         email: item.email,
                         phone_number: item.phone_number,
+                        phone_number2: item.phone_number2,
+                        facebook_username: item.facebook_username,
+                        twitter_username: item.twitter_username,
+                        instagram_username: item.instagram_username,
                         whatsapp_number: item.whatsapp_number,
                         status: item.status,
+    
                         "view-btn": {
                             component: () => (
                                 <ActionButton

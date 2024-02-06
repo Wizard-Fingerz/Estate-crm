@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsPeople } from "react-icons/bs";
+import { BsPeople, BsPersonCircle, BsBell, BsPeopleFill } from "react-icons/bs";
 import { TiContacts } from "react-icons/ti";
 import { TiBeer } from "react-icons/ti";
 import { FiMail, FiFileText, FiBarChart2 } from "react-icons/fi";
@@ -15,34 +15,29 @@ import NextLink from "next/link";
 
 const sidebarItems = [
   {
-    name: "Home",
-    href: "/dashboard",
+    name: "Property",
+    href: "/marketer",
     icon: AiOutlineHome,
   },
   {
-    name: "Users",
-    href: "/dashboard/users",
-    icon: BsPeople,
-  },
-  {
-    name: "Posts",
-    href: "/dashboard/posts",
-    icon: FiFileText,
-  },
-  {
-    name: "Contact",
-    href: "/dashboard/contact",
+    name: "Prospects",
+    href: "/marketer/prospects",
     icon: TiContacts,
   },
   {
-    name: "Report",
-    href: "/dashboard/report",
+    name: "Customers",
+    href: "/marketer/customers",
+    icon: TiContacts,
+  },
+  {
+    name: "Reports",
+    href: "/marketer/reports",
     icon: FiBarChart2,
   },
   {
-    name: "Commerce",
-    href: "/dashboard/commerce",
-    icon: TiBeer,
+    name: "Profile",
+    href: "/marketer/profile",
+    icon: BsPersonCircle,
   },
 ];
 
@@ -61,18 +56,18 @@ const MarketerSideBar = () => {
   return (
     <div className="sidebar__wrapper">
       <button className="btn" onClick={toggleSidebarcollapse}>
-        {isCollapsed ? <MdKeyboardArrowRight /> : <MdKeyboardArrowLeft />}
+        {isCollapsed ? <MdKeyboardArrowRight style={{ color: 'white' }}/> : <MdKeyboardArrowLeft style={{ color: 'white' }}/>}
       </button>
       <aside className="sidebar" data-collapse={isCollapsed}>
         <div className="sidebar__top">
           <Image
-            width={80}
-            height={80}
+            width={20}
+            height={20}
             className="sidebar__logo"
-            src="/assets/logo.png"
+            src="/assets/logo_white.svg"
             alt="logo"
           />
-          <p className="sidebar__logo-name">Accountant</p>
+          <p className="sidebar__logo-name">Marketer</p>
         </div>
         <ul className="sidebar__list">
           {sidebarItems.map(({ name, href, icon: Icon }) => {
@@ -92,18 +87,6 @@ const MarketerSideBar = () => {
             );
           })}
         </ul>
-        {/* <div
-          style={{ cursor: 'pointer' }}
-          className={`sidebar__link ${
-            router.pathname === '' ? 'sidebar__link--active' : ''
-          }`}
-          onClick={() => setLogoutModalOpen(true)}
-        >
-          <span className="sidebar__icon">
-            <AiOutlineLogout />
-          </span>
-          <span className="sidebar_name">Logout</span>
-        </div> */}
       </aside>
       {/* Logout Confirmation Modal */}
       <Modal
