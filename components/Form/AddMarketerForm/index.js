@@ -29,7 +29,7 @@ function AddMarketerForm() {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/prospects/', {
+                const response = await fetch('${API_BASE_URL}/property/prospects/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -78,7 +78,7 @@ function AddMarketerForm() {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/create_marketer/', {
+            const response = await fetch('${API_BASE_URL}/create_marketer/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,

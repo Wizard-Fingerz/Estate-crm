@@ -18,7 +18,7 @@ const AdminCustomers = () => {
             }
             
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/customer/count/', {
+                const response = await fetch('${API_BASE_URL}/property/customer/count/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

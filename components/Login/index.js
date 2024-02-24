@@ -19,7 +19,7 @@ function Login() {
 
             // Send a request to your API endpoint to determine if password change is required
             try {
-                const response = await fetch('http://127.0.0.1:8000/check-password-change/', {
+                const response = await fetch('${API_BASE_URL}/check-password-change/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ function Login() {
 
         // Send a POST request to your Django API endpoint
         try {
-            const response = await fetch('http://127.0.0.1:8000/login/', {
+            const response = await fetch('${API_BASE_URL}/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,10 +80,12 @@ function Login() {
                 }
             } else {
                 // Handle login failure
+                alert('Login Failed')
                 console.error('Login failed');
             }
         } catch (error) {
             // Handle network or request error
+            alert('Network error:', error);
             console.error('Network error:', error);
         }
     };

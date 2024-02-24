@@ -13,6 +13,7 @@ import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
 import EditProspectForm from "../../Form/EditProspectForm";
 import Table from "../../DataTables/Table";
+import { API_BASE_URL } from '@/constants';
 
 const table_column_heading = [
     {
@@ -94,7 +95,7 @@ const ProspectsList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/prospects/', {
+                const response = await fetch(`${API_BASE_URL}/property/prospects/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

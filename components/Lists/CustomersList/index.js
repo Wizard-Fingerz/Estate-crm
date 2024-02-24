@@ -12,6 +12,7 @@ import Modal from "../../sample_components/ui-components/Modal";
 import EditCustomerForm from "../../Form/EditCustomerForm";
 import ConversionForm from "../../Form/ConversionForm";
 import Table from "../../DataTables/Table";
+import { API_BASE_URL } from '@/constants';
 
 const table_column_heading = [
     {
@@ -94,7 +95,7 @@ const CustomersList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/customers/', {
+                const response = await fetch(`${API_BASE_URL}/property/customers/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

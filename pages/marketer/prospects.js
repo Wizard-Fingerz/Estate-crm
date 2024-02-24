@@ -20,7 +20,7 @@ const AdminProspects = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/prospect/count/', {
+                const response = await fetch('${API_BASE_URL}/property/prospect/count/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

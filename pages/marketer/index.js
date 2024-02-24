@@ -19,7 +19,7 @@ const MarketerDashboard = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/property/count/', {
+                const response = await fetch('${API_BASE_URL}/property/property/count/', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

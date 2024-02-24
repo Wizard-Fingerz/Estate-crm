@@ -15,6 +15,7 @@ import AddMarketerForm from "../../Form/AddMarketerForm";
 import EditMarketerForm from "../../Form/EditMarketerForm";
 import ViewMarketerDetails from "../../Form/ViewMarketerDetails";
 import Table from "../../DataTables/Table";
+import { API_BASE_URL } from '@/constants';
 
 const table_column_heading = [
     {
@@ -86,7 +87,7 @@ const MarketersList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/marketers/', {
+                const response = await fetch(`${API_BASE_URL}/property/marketers/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -196,7 +197,7 @@ const MarketersList = () => {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/delete-marketers/${marketerId}/`, {
+            const response = await fetch(`${API_BASE_URL}/delete-marketers/${marketerId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -247,8 +248,8 @@ const MarketersList = () => {
                     employee_name: `${item.first_name} ${item.last_name}`,
                     employee_contact: item.contact,
                     employee_email: item.email,
-                    no_of_followup: item.description,
-                    no_of_wons: item.status,
+                    no_of_followup: item.no_of_followup ?? 0,
+                    no_of_wons: item.no_of_wins ?? 0,
                     "view-btn": {
                         component: () => (
                             <ActionButton

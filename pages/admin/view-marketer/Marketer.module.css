@@ -1,5 +1,5 @@
 .cover_picture{
-    width: 70vw;
+    width: 90vw;
     height: 30vh;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .profile_picture {
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    border-radius: 500%;
+    width: 20px;
+    height: 20px;
 }

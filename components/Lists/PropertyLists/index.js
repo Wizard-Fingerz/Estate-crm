@@ -13,6 +13,7 @@ import EditPropertyForm from "../../Form/EditPropertyForm";
 import AddPropertyForm from "../../Form/AddPropertyForm";
 import ViewPropertyDetails from "../../Form/ViewPropertyDetails";
 import Table from "../../DataTables/Table";
+import { API_BASE_URL } from '@/pages/constants';
 
 const table_column_heading = [
     
@@ -84,7 +85,7 @@ const PropertyList = () => {
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:8000/property/properties/', {
+                const response = await fetch(`${API_BASE_URL}/property/properties/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -168,7 +169,7 @@ const PropertyList = () => {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/property/delete-properties/${propertyId}/`, {
+            const response = await fetch(`${API_BASE_URL}/property/delete-properties/${propertyId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Token ${token}`,

@@ -36,7 +36,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/property/properties/', {
+            const response = await fetch('${API_BASE_URL}/property/properties/', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -64,7 +64,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/property/marketers/', {
+            const response = await fetch('${API_BASE_URL}/property/marketers/', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -109,7 +109,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/property/create_prospect/', {
+            const response = await fetch('${API_BASE_URL}/property/create_prospect/', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,

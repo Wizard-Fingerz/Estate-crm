@@ -69,7 +69,7 @@ function EditPropertyForm({ propertyData }) {
         console.log(formData);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/property/create_property/', {
+            const response = await fetch('${API_BASE_URL}/property/create_property/', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Token ${token}`,
