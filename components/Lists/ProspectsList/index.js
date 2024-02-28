@@ -281,7 +281,7 @@ const ProspectsList = () => {
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
-                {viewModalData && <ViewProspectDetail marketerData={viewModalData} />}
+                {viewModalData && <ViewProspectDetail prospectData={viewModalData} />}
 
             </Modal>
 
