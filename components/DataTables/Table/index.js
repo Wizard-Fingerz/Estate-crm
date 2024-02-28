@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.css";
 import ActionButton from "/components/sample_components/ui-components/ActionButton";
 import PaginationButton from "/components/sample_components/ui-components/PaginationButton";
@@ -6,11 +6,13 @@ import Section from '../../sample_components/ui-components/Section';
 
 import { FaSearch } from 'react-icons/fa';
 
-const ProspectTable = ({
+const Table = ({
     headingRightItem1 = () => { },
     headingRightItem2 = () => { },
+    headingRightItem3 = () => { },
     heading,
     data,
+    categoryKey
 }) => {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
@@ -19,19 +21,16 @@ const ProspectTable = ({
     const [activeButton, setActiveButton] = useState("All");
 
     // Extract unique categories from data
-    // Extract unique categories from data only when data is not empty
-    const uniqueCategories = data.length > 0
-        ? [...new Set(data.map((item) => item.property_type || "Others"))]
-        : [];
+    const uniqueCategories = useMemo(() => {
+        return data.length > 0 ? [...new Set(data.map((item) => item[categoryKey] || "Others"))] : [];
+    }, [data, categoryKey]);
 
-
-    console.log('Unique Categories:', uniqueCategories);
     // Update state with available categories
     const [availableCategories, setAvailableCategories] = useState(["All", ...uniqueCategories]);
 
     useEffect(() => {
         setAvailableCategories(["All", ...uniqueCategories]);
-    }, [data]); // Trigger the effect whenever data changes
+    }, [data, uniqueCategories]);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
@@ -51,13 +50,12 @@ const ProspectTable = ({
                 )
             )
             : data.filter((item) =>
-                item.property_type && item.property_type === selectedCategory &&
+                item[categoryKey] && item[categoryKey] === selectedCategory &&
                 Object.values(item).some(
                     (value) =>
                         typeof value === "string" && value.toLowerCase().includes(searchQuery.toLowerCase())
                 )
             );
-
 
     // Calculate total pages and update filteredData based on current page and itemsPerPage
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -125,6 +123,7 @@ const ProspectTable = ({
                             style={{
                                 borderRadius: '15px',
                                 height: '40px',
+                                background: 'none',
                                 fontSize: '16px',
                                 padding: '20px',
                                 border: '0.5px solid grey',
@@ -138,6 +137,7 @@ const ProspectTable = ({
                     </div>
                     {headingRightItem1()}
                     {headingRightItem2()}
+                    {headingRightItem3()}
                 </div>
                 <div className={styles["table-wrapper"]} style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <table className={styles["table"]}>
@@ -222,4 +222,4 @@ const ProspectTable = ({
     );
 };
 
-export default ProspectTable;
+export default Table;

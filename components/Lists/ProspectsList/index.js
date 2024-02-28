@@ -82,6 +82,7 @@ const ProspectsList = () => {
     const [addProspectModal, setAddProspectModal] = useState(false);
     const [downloadProspectModal, setDownloadProspectModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
+    const [viewModalData, setViewModalData] = useState(null);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
@@ -124,7 +125,9 @@ const ProspectsList = () => {
         console.log('Prospect Data in ProspectsList:', prospectData);
     }, [prospectData]);
 
-    const openViewModal = () => {
+    const openViewModal = (prospectId) => {
+        const selectedProspect = tableData.find(item => item.id === prospectId);
+        setViewModalData(selectedProspect);
         setViewModal(true);
     };
 
@@ -211,7 +214,7 @@ const ProspectsList = () => {
                     facebook_username: item.facebook_username,
                     twitter_username: item.twitter_username,
                     instagram_username: item.instagram_username,
-                    whatsapp_number: item.whatsapp_number,
+                    whatsapp_number: item.whatsapp,
                     status: item.status,
 
                     "view-btn": {
@@ -278,9 +281,8 @@ const ProspectsList = () => {
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
-                <div>
-                    <p>Property details go here.</p>
-                </div>
+                {viewModalData && <ViewProspectDetail marketerData={viewModalData} />}
+
             </Modal>
 
             <Modal

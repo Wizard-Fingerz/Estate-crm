@@ -15,6 +15,8 @@ function AddProspectForm() {
     const [prospect_twitter_username, setProspectTwitterUsername] = useState('');
     const [prospect_instagram_username, setProspectInstagramUsername] = useState('');
     const [prospect_contact_source, setProspectContactSource] = useState('');
+    const [planned_commitment_date, setPlannedCommitmentDate] = useState('');
+    const [area_of_interest, setAreaOfInterest] = useState('');
     const [property, setProperty] = useState('');
     const [marketer, setMarketer] = useState('');
     const [properties, setProperties] = useState([]);
@@ -98,6 +100,8 @@ function AddProspectForm() {
         formData.append('prospect_twitter_username', prospect_twitter_username);
         formData.append('prospect_instagram_username', prospect_instagram_username);
         formData.append('prospect_contact_source', prospect_contact_source);
+        formData.append('planned_commitment_date', planned_commitment_date);
+        formData.append('area_of_interest', area_of_interest);
         formData.append('property', property);
         formData.append('marketer', marketer);
 
@@ -192,6 +196,19 @@ function AddProspectForm() {
                     className={styles.input}
                 /><br />
 
+                <select
+
+                    value={area_of_interest}
+                    onChange={(e) => setAreaOfInterest(e.target.value)}
+                    className={styles.input}
+                >
+                    <option>Area of Interest</option>
+                    <option>Land</option>
+                    <option>Housing</option>
+                    <option>Membership</option>
+                    <option>Partnership</option>
+                </select><br/>
+
 
 
 
@@ -243,11 +260,19 @@ function AddProspectForm() {
                     <option>Assign Followup Marketer</option>
                     {followupMarketers.map((marketer) => (
                         <option key={marketer.id} value={marketer.id}>
-                            {marketer.name} {/* Use the actual property name or identifier */}
+                            {marketer.username} {/* Use the actual property name or identifier */}
                         </option>
                     ))}
                 </select>
                 <br />
+
+                <input
+                    type="date"
+                    placeholder="Planned Commitment Date"
+                    value={planned_commitment_date}
+                    onChange={(e) => setPlannedCommitmentDate(e.target.value)}
+                    className={styles.input}
+                /><br />
 
 
 
