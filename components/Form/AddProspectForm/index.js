@@ -1,6 +1,7 @@
 import { BiColor } from 'react-icons/bi';
 import styles from './AddProspect.module.css';
 import { React, useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/pages/constants';
 
 function AddProspectForm() {
     const [prospect_prefix, setProspectPrefix] = useState('');
@@ -36,7 +37,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/property/properties/', {
+            const response = await fetch(`${API_BASE_URL}/property/properties/`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -64,7 +65,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/property/marketers/', {
+            const response = await fetch(`${API_BASE_URL}/property/marketers/`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,
@@ -109,7 +110,7 @@ function AddProspectForm() {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/property/create_prospect/', {
+            const response = await fetch(`${API_BASE_URL}/property/create_prospect/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,

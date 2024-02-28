@@ -94,7 +94,7 @@ function EditMarketerForm({ marketerData }) {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/create_marketer/', {
+            const response = await fetch(`${API_BASE_URL}/create_marketer/`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Token ${token}`,
