@@ -1,12 +1,12 @@
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
-import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
+import MarketerBaseLayout from "@/components/sample_components/MarketerBaseLayout";
 
 const AdminProfile = () => {
     return (
-        <AdminBaseLayout>
+        <MarketerBaseLayout>
             <DashboardNav name = 'Profile' />
         
-        </AdminBaseLayout>
+        </MarketerBaseLayout>
     );
 };
 

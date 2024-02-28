@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import ProspectsByMarketer from "@/components/Lists/ProspectsByMarketer";
-import BaseLayout from "@/components/sample_components/AdminBaseLayout";
+import MarketerBaseLayout from "@/components/sample_components/MarketerBaseLayout";
 import DataCard from "@/components/sample_components/DataCard";
-import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
+import DashboardNav from "@/components/sample_components/ui-components/DashboardNav";
+import { API_BASE_URL } from "../constants";
 
 const AdminProspects = () => {
     const [prospectCount, setProspectCount] = useState(0);
@@ -20,7 +21,7 @@ const AdminProspects = () => {
             }
 
             try {
-                const response = await fetch('${API_BASE_URL}/property/prospect/count/', {
+                const response = await fetch(`${API_BASE_URL}/property/prospect/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -39,7 +40,7 @@ const AdminProspects = () => {
     }, []);
 
     return (
-        <BaseLayout>
+        <MarketerBaseLayout>
             <DashboardNav name='Prospects' />
             <div style={{ display: "flex", justifyContent: "space-between", width: '60vw' }}>
                 <DataCard label="All Prospects" value={prospectCount} />
@@ -50,7 +51,7 @@ const AdminProspects = () => {
 
             <ProspectsByMarketer />
 
-        </BaseLayout>
+        </MarketerBaseLayout>
     );
 };
 

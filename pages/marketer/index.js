@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropertyList from "@/components/Lists/PropertyLists";
 import DataCard from "@/components/sample_components/DataCard";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav";
-
+import { API_BASE_URL } from "../constants";
 
 const MarketerDashboard = () => {
     const [propertyCount, setPropertyCount] = useState(0);
@@ -19,7 +19,7 @@ const MarketerDashboard = () => {
             }
 
             try {
-                const response = await fetch('${API_BASE_URL}/property/property/count/', {
+                const response = await fetch(`${API_BASE_URL}/property/property/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

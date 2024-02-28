@@ -73,7 +73,7 @@ function Login() {
                 if (changePasswordRequired) {
                     window.location.href = '/change-password'; // Redirect to the password change page
                 } else if (data.user_type === 'marketer') {
-                    window.location.href = '/marketer-dashboard'; // Redirect to the marketer dashboard
+                    window.location.href = '/marketer'; // Redirect to the marketer dashboard
                 } else if (data.user_type === 'accountant') {
                     window.location.href = '/accountant-dashboard'; // Redirect to the accountant dashboard
                 } else if (data.user_type === 'admin') {
