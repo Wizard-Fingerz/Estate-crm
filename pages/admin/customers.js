@@ -3,6 +3,7 @@ import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
 import DataCard from "@/components/sample_components/DataCard";
 import CustomersList from "@/components/Lists/CustomersList";
+import { API_BASE_URL } from "../constants";
 
 const AdminCustomers = () => {
     const [customerCount, setCustomerCount] = useState(0);
@@ -18,7 +19,7 @@ const AdminCustomers = () => {
             }
             
             try {
-                const response = await fetch('${API_BASE_URL}/property/customer/count/', {
+                const response = await fetch(`${API_BASE_URL}/property/customer/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

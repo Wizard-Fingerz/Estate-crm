@@ -13,7 +13,7 @@ import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
 import EditProspectForm from "../../Form/EditProspectForm";
 import Table from "../../DataTables/Table";
-import { API_BASE_URL } from '@/constants';
+import { API_BASE_URL } from "@/pages/constants";
 
 const table_column_heading = [
     {

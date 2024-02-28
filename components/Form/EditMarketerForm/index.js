@@ -3,6 +3,7 @@ import ProspectCard from "../../sample_components/ui-components/ProspectCard";
 import ActionButton from "../../sample_components/ui-components/ActionButton";
 import styles from './EditMarketerForm.module.css';
 import { React, useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/pages/constants';
 
 function EditMarketerForm({ marketerData }) {
     const [full_name, setMarketerFullName] = useState('');
@@ -44,7 +45,7 @@ function EditMarketerForm({ marketerData }) {
             }
 
             try {
-                const response = await fetch('${API_BASE_URL}/property/prospects/', {
+                const response = await fetch(`${API_BASE_URL}/property/prospects/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

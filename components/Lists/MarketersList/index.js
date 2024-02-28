@@ -15,7 +15,7 @@ import AddMarketerForm from "../../Form/AddMarketerForm";
 import EditMarketerForm from "../../Form/EditMarketerForm";
 import ViewMarketerDetails from "../../Form/ViewMarketerDetails";
 import Table from "../../DataTables/Table";
-import { API_BASE_URL } from '@/constants';
+import { API_BASE_URL } from "@/pages/constants";
 
 const table_column_heading = [
     {

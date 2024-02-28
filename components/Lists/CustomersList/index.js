@@ -12,7 +12,7 @@ import Modal from "../../sample_components/ui-components/Modal";
 import EditCustomerForm from "../../Form/EditCustomerForm";
 import ConversionForm from "../../Form/ConversionForm";
 import Table from "../../DataTables/Table";
-import { API_BASE_URL } from '@/constants';
+import { API_BASE_URL } from "@/pages/constants";
 
 const table_column_heading = [
     {

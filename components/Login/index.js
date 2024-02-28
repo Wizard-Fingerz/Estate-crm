@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Login.module.css';
+import { API_BASE_URL } from '@/pages/constants';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ function Login() {
 
             // Send a request to your API endpoint to determine if password change is required
             try {
-                const response = await fetch('${API_BASE_URL}/check-password-change/', {
+                const response = await fetch(`${API_BASE_URL}/check-password-change/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ function Login() {
 
         // Send a POST request to your Django API endpoint
         try {
-            const response = await fetch('${API_BASE_URL}/login/', {
+            const response = await fetch(`${API_BASE_URL}/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

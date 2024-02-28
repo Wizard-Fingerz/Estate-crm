@@ -3,6 +3,7 @@ import ProspectsList from "@/components/Lists/ProspectsList";
 import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
 import DataCard from "@/components/sample_components/DataCard";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
+import { API_BASE_URL } from "../constants";
 
 const AdminProspects = () => {
     const [prospectCount, setProspectCount] = useState(0);
@@ -20,7 +21,7 @@ const AdminProspects = () => {
             }
             
             try {
-                const response = await fetch('${API_BASE_URL}/property/prospect/count/', {
+                const response = await fetch(`${API_BASE_URL}/property/prospect/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

@@ -3,6 +3,7 @@ import MarketersList from "@/components/Lists/MarketersList";
 import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
 import DataCard from "@/components/sample_components/DataCard";
+import { API_BASE_URL } from "../constants";
 
 const AdminMarketers = () => {
     const [marketerCount, setMarketerCount] = useState(0);
@@ -18,7 +19,7 @@ const AdminMarketers = () => {
             }
             
             try {
-                const response = await fetch('${API_BASE_URL}/marketer/count/', {
+                const response = await fetch(`${API_BASE_URL}/marketer/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,

@@ -3,6 +3,7 @@ import PropertyList from "@/components/Lists/PropertyLists";
 import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
 import DataCard from "@/components/sample_components/DataCard";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav";
+import { API_BASE_URL } from "../constants";
 
 const AdminDashboard = () => {
     const [propertyCount, setPropertyCount] = useState(0);
@@ -18,7 +19,7 @@ const AdminDashboard = () => {
             }
             
             try {
-                const response = await fetch('${API_BASE_URL}/property/property/count/', {
+                const response = await fetch(`${API_BASE_URL}/property/property/count/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
