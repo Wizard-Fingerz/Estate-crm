@@ -271,7 +271,7 @@ function AddProspectForm() {
                 </select>
                 <br />
 
-                <button className={styles.submitButton}>Auto-Assign Marketer</button><br/>
+                <button className={styles.input}>Auto-Assign Marketer</button><br/>
 
                 <input
                     type="date"

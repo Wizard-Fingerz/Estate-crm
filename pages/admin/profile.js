@@ -7,16 +7,17 @@ const AdminProfile = () => {
     return (
         <AdminBaseLayout>
             <DashboardNav name='Profile' />
-            <div>
-                <Image src={''} alt="Cover Image" width={1000} height={200} />
+            <div className={styles.container}>
+                <Image className={styles.cover_picture} src={`${API_BASE_URL}/${marketerData?.cover_picture}`} alt="Cover Image" width={1000} height={200} />
 
-                <div >
-                    <Image  src={''} alt="Profile Image" width={20} height={20} />
+                <div className={styles.profile_picture}>
+                    <Image className={styles.cover_picture} src={`${API_BASE_URL}/${marketerData?.profile_picture}`} alt="Profile Image" width={20} height={20} />
                 </div>
-                <p>Employee Name: {''}</p>
-                <p>Employee ID: {''}</p>
+                <p>Employee Name: {`${marketerData?.first_name} ${marketerData?.last_name}`}</p>
+                <p>Employee ID: {marketerData?.username}</p>
 
             </div>
+            <ProspectsByMarketer />
 
         </AdminBaseLayout>
     );
