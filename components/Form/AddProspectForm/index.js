@@ -188,7 +188,11 @@ function AddProspectForm() {
                     onChange={(e) => setProspectPhoneNumber2(e.target.value)}
                     className={styles.input}
                 /><br />
-                <input
+
+
+            </div>
+            <div className={styles.secondForm}>
+            <input
                     type="text"
                     placeholder="WhatsApp Number"
                     value={prospect_whatsapp_phone_number}
@@ -207,13 +211,9 @@ function AddProspectForm() {
                     <option>Housing</option>
                     <option>Membership</option>
                     <option>Partnership</option>
-                </select><br/>
+                </select><br />
 
 
-
-
-            </div>
-            <div className={styles.secondForm}>
 
                 <input
                     type="text"
@@ -236,6 +236,11 @@ function AddProspectForm() {
                     onChange={(e) => setProspectInstagramUsername(e.target.value)}
                     className={styles.input}
                 /><br />
+
+
+            </div>
+            <div className={styles.secondForm}>
+
                 <textarea className={styles.input} placeholder='Contact Source'
                     onChange={(e) => setProspectContactSource(e.target.value)}
                     value={prospect_contact_source}></textarea><br />
@@ -265,6 +270,8 @@ function AddProspectForm() {
                     ))}
                 </select>
                 <br />
+
+                <button className={styles.submitButton}>Auto-Assign Marketer</button><br/>
 
                 <input
                     type="date"

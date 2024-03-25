@@ -2,7 +2,8 @@ import { BiColor } from 'react-icons/bi';
 import ProspectCard from "../../sample_components/ui-components/ProspectCard";
 import ActionButton from "../../sample_components/ui-components/ActionButton";
 import styles from './AddMarketerForm.module.css';
-import { React, useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/pages/constants';
+import { React, useState, useEffect } from 'react';
 
 function AddMarketerForm() {
     const [full_name, setMarketerFullName] = useState('');
@@ -29,7 +30,7 @@ function AddMarketerForm() {
             }
 
             try {
-                const response = await fetch('${API_BASE_URL}/property/prospects/', {
+                const response = await fetch(`${API_BASE_URL}/property/prospects/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -78,7 +79,7 @@ function AddMarketerForm() {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/create_marketer/', {
+            const response = await fetch(`${API_BASE_URL}/create_marketer/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,

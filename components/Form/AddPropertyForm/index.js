@@ -1,5 +1,6 @@
 import { BiColor } from 'react-icons/bi';
 import styles from './AddPropertyList.module.css';
+import { API_BASE_URL } from '@/pages/constants';
 import { React, useState } from 'react'
 
 function AddPropertyForm() {
@@ -58,7 +59,7 @@ function AddPropertyForm() {
         console.log(formData);
 
         try {
-            const response = await fetch('${API_BASE_URL}/property/create_property/', {
+            const response = await fetch(`${API_BASE_URL}/property/create_property/`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Token ${token}`,
