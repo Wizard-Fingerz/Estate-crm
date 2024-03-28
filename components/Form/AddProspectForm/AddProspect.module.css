@@ -62,5 +62,6 @@
   margin: 10px 0;
   border-radius: 15px;
   cursor: pointer;
+  width: 20vw;
   /* Add a pointer cursor to the button */
 }

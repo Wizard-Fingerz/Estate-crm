@@ -1,6 +1,8 @@
 import styles from './viewProspectDetails.module.css'
 
-function ViewProspectDetail({prospectData}) {
+function ViewProspectDetails({prospectData}) {
+    console.log(prospectData.full_name);
+    console.log('view hello');
     return (
         <div className={styles.container}>
             <div className={styles.left}>
@@ -8,10 +10,10 @@ function ViewProspectDetail({prospectData}) {
                 <p>`{prospectData.prefix}`</p>
 
             </div>
-            <div className={stylesright}></div>
+            <div className={styles.right}></div>
 
         </div>
     );
 }
 
-export default ViewProspectDetail;
+export default ViewProspectDetails;

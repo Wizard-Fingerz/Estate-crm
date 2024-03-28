@@ -15,6 +15,7 @@ function AddProspectForm() {
     const [prospect_twitter_username, setProspectTwitterUsername] = useState('');
     const [prospect_instagram_username, setProspectInstagramUsername] = useState('');
     const [prospect_contact_source, setProspectContactSource] = useState('');
+    const [prospect_other_info, setProspectOtherInfo] = useState('');
     const [planned_commitment_date, setPlannedCommitmentDate] = useState('');
     const [area_of_interest, setAreaOfInterest] = useState('');
     const [property, setProperty] = useState('');
@@ -100,6 +101,7 @@ function AddProspectForm() {
         formData.append('prospect_twitter_username', prospect_twitter_username);
         formData.append('prospect_instagram_username', prospect_instagram_username);
         formData.append('prospect_contact_source', prospect_contact_source);
+        formData.append('prospect_other_info', prospect_other_info);
         formData.append('planned_commitment_date', planned_commitment_date);
         formData.append('area_of_interest', area_of_interest);
         formData.append('property', property);
@@ -192,7 +194,7 @@ function AddProspectForm() {
 
             </div>
             <div className={styles.secondForm}>
-            <input
+                <input
                     type="text"
                     placeholder="WhatsApp Number"
                     value={prospect_whatsapp_phone_number}
@@ -236,6 +238,13 @@ function AddProspectForm() {
                     onChange={(e) => setProspectInstagramUsername(e.target.value)}
                     className={styles.input}
                 /><br />
+                <input
+                    type="text"
+                    placeholder="Other Info"
+                    value={prospect_other_info}
+                    onChange={(e) => setProspectOtherInfo(e.target.value)}
+                    className={styles.input}
+                /><br />
 
 
             </div>
@@ -271,7 +280,7 @@ function AddProspectForm() {
                 </select>
                 <br />
 
-                <button className={styles.input}>Auto-Assign Marketer</button><br/>
+                <button className={styles.input}>Auto-Assign Marketer</button><br />
 
                 <input
                     type="date"

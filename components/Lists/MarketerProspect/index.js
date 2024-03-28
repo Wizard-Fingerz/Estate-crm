@@ -1,4 +1,5 @@
 import ActionButton from "../../sample_components/ui-components/ActionButton";
+
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -9,12 +10,12 @@ import {
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
-import EditCustomerForm from "../../Form/EditCustomerForm";
-import ConversionForm from "../../Form/ConversionForm";
+import AddProspectForm from "../../Form/AddProspectForm";
+import GiveFollowUpReportForm from "../../Form/GiveFollowUpReportForm";
 import SendBulkMail from "../../Form/SendBulkMail";
 import SendSingleMail from "../../Form/SendSingleMail";
 import Table from "../../DataTables/Table";
-import { API_BASE_URL } from "@/pages/constants";
+import { API_BASE_URL } from '@/pages/constants';
 
 const table_column_heading = [
     {
@@ -47,16 +48,20 @@ const table_column_heading = [
         heading: "WhatsApp Number",
     },
 
-    {
 
-        key: "amount",
-        heading: "Amount Paid",
+    {
+        key: "facebook_username",
+        heading: "Facebook Username",
     },
 
     {
+        key: "twitter_username",
+        heading: "Twitter Username",
+    },
 
-        key: "payment_status",
-        heading: "Payment Status",
+    {
+        key: "instagram_username",
+        heading: "Instagram Username",
     },
     {
         key: "view-btn",
@@ -67,19 +72,21 @@ const table_column_heading = [
         key: "followup-btn",
         heading: "",
     },
+
+    {
+        key: "report-btn",
+        heading: "",
+    },
 ];
 
-
-const CustomersList = () => {
-    const [customerData, setCustomerData] = useState([]);
-    const [addCustomerModal, setAddCustomerModal] = useState(false);
-    const [downloadCustomerModal, setDownloadCustomerModal] = useState(false);
+const MarketerProspect = () => {
+    const [prospectData, setProspectData] = useState([]);
+    const [addProspectModal, setAddProspectModal] = useState(false);
+    const [downloadProspectModal, setDownloadProspectModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
-    const [editModal, setEditModal] = useState(false);
-    const [deleteModal, setDeleteModal] = useState(false);
+    const [giveReportModal, setGiveReportModal] = useState(false);
     const [bulkEmailModal, setBulkEmailModal] = useState(false);
     const [singleEmailModal, setSingleEmailModal] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,7 +98,7 @@ const CustomersList = () => {
             }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/property/customers/`, {
+                const response = await fetch(`${API_BASE_URL}/property/prospects/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -100,12 +107,12 @@ const CustomersList = () => {
                 const data = await response.json();
 
                 // Update state using the callback function
-                setCustomerData((prevCustomerData) => {
-                    console.log('Customer Data:', data);
+                setProspectData((prevProspectData) => {
+                    console.log('Prospect Data:', data);
                     return data;
                 });
-                // Inside CustomersList component
-                console.log('Customer Data in CustomersList:', customerData);
+                // Inside ProspectsList component
+                console.log('Prospect Data in ProspectsList:', prospectData);
 
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -117,8 +124,8 @@ const CustomersList = () => {
 
     // Log the updated state after it is set by the effect
     useEffect(() => {
-        console.log('Customer Data in CustomersList:', customerData);
-    }, [customerData]);
+        console.log('Prospect Data in ProspectsList:', prospectData);
+    }, [prospectData]);
 
     const openViewModal = () => {
         setViewModal(true);
@@ -126,16 +133,6 @@ const CustomersList = () => {
 
     const closeViewModal = () => {
         setViewModal(false);
-        window.location.reload();
-    };
-
-    const openEditModal = () => {
-        setEditModal(true);
-    };
-
-    const closeEditModal = () => {
-        setEditModal(false);
-        window.location.reload();
     };
 
     const openBulkEmailModal = () => {
@@ -153,32 +150,28 @@ const CustomersList = () => {
         setSingleEmailModal(false);
     };
 
-
-    const openDeleteModal = () => {
-        setDeleteModal(true);
+    const openReportModal = () => {
+        setGiveReportModal(true);
     };
 
-    const closeDeleteModal = () => {
-        setDeleteModal(false);
-        window.location.reload();
+    const closeReportModal = () => {
+        setGiveReportModal(false);
     };
 
-    const closeAddCustomerModal = () => {
-        setAddCustomerModal(false);
-        window.location.reload();
+    const closeAddProspectModal = () => {
+        setAddProspectModal(false);
     };
 
-    const openAddCustomerModal = () => {
-        setAddCustomerModal(true);
+    const openAddProspectModal = () => {
+        setAddProspectModal(true);
     };
 
-    const closeDownloadCustomerModal = () => {
-        setDownloadCustomerModal(false);
-        window.location.reload();
+    const closeDownloadProspectModal = () => {
+        setDownloadProspectModal(false);
     };
 
-    const openDownloadCustomerModal = () => {
-        setDownloadCustomerModal(true);
+    const openDownloadProspectModal = () => {
+        setDownloadProspectModal(true);
     };
 
     const [modal, setModal] = useState(false);
@@ -186,6 +179,7 @@ const CustomersList = () => {
         //alert('closing');
         setModal(false);
     };
+    console.log('Prospect Data before mapping2:', prospectData);
 
 
     return (
@@ -194,14 +188,13 @@ const CustomersList = () => {
             <Table
                 headingRightItem1={() => (
                     <ActionButton
-                        onClick={openAddCustomerModal}
-                        label="Add Customer"
+                        onClick={openAddProspectModal}
+                        label="Add Prospect"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
 
                 )}
-
 
                 headingRightItem2={() => (
                     <ActionButton
@@ -214,16 +207,17 @@ const CustomersList = () => {
                 )}
                 headingRightItem3={() => (
                     <ActionButton
-                        onClick={openDownloadCustomerModal}
+                        onClick={openDownloadProspectModal}
                         label="Download All"
                         // Icon={FaCloudDownloadAlt}
                         style={{ margin: '0 19px', }}
                     />
 
                 )}
-                categoryKey='payment_status'
+                categoryKey='status'
                 heading={table_column_heading}
-                data={customerData.map((item) => ({
+                // Change the mapping in the 'ProspectTable' component
+                data={prospectData.map((item) => ({
                     id: item.id,
                     name: item.full_name,
                     address: item.address,
@@ -233,8 +227,9 @@ const CustomersList = () => {
                     facebook_username: item.facebook_username,
                     twitter_username: item.twitter_username,
                     instagram_username: item.instagram_username,
-                    whatsapp_number: item.whatsapp_number,
+                    whatsapp_number: item.whatsapp,
                     status: item.status,
+
                     "view-btn": {
                         component: () => (
                             <ActionButton
@@ -259,69 +254,61 @@ const CustomersList = () => {
                         ),
                     },
 
+                    "report-btn": {
+                        component: () => (
+                            <ActionButton
+                                label="Give Report"
+                                Icon={FaEdit}
+                                inverse={true}
+                                onClick={openReportModal}
+                                style={{ color: 'green', borderColor: 'green' }}
+                            />
+                        ),
+                    },
                 }))}
 
             />
+
             <Modal
-                isOpen={addCustomerModal}
-                heading={"Convert Prospect"}
-                onClose={closeAddCustomerModal}
+                isOpen={addProspectModal}
+                heading={"Add Prospect"}
+                onClose={closeAddProspectModal}
             >
-                <ConversionForm />
+                <AddProspectForm />
                 {/* Add your form or components for adding property */}
                 {/* For example: */}
                 {/* <AddPropertyForm onSubmit={handleAddProperty} /> */}
             </Modal>
 
             <Modal
-                isOpen={modal}
-                heading={"Download all business details"}
-                onClose={handleClose}
-                positiveText={'Download'}
-                negativeText={'Cancel'}
-            />
+                isOpen={downloadProspectModal}
+                heading={"Download All Prospect Details"}
+                onClose={closeDownloadProspectModal}
+            >
+                {/* Add your components for downloading property details */}
+                {/* For example: */}
+                {/* <DownloadPropertyDetailsForm onSubmit={handleDownloadProperty} /> */}
+            </Modal>
             <Modal
                 isOpen={viewModal}
-                heading={"View Customer"}
+                heading={"View Prospect"}
                 onClose={closeViewModal}
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
                 <div>
-                    <p>Property details go here.</p>
+                    <p>Prospect details go here.</p>
                 </div>
             </Modal>
 
             <Modal
-                isOpen={editModal}
-                heading={"Edit Customer"}
-                onClose={closeEditModal}
+                isOpen={giveReportModal}
+                heading={"Give FollowUp Report"}
+                onClose={closeReportModal}
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <EditCustomerForm />
-            </Modal>
-
-            <Modal
-                isOpen={deleteModal}
-                heading={"Delete Customer"}
-                onClose={closeDeleteModal}
-            >
-                {/* Add your components for deleting property details */}
-                {/* For example: */}
-                <div>
-                    <p>Are you sure you want to delete this property?</p>
-                    <ActionButton
-                        label="Delete"
-                        Icon={FaTrash}
-                        inverse={true}
-                        onClick={() => {
-                            // Handle delete action here
-                            closeDeleteModal();
-                        }}
-                        style={{ color: 'red', borderColor: 'red' }}
-                    />
-                </div>
+                <GiveFollowUpReportForm />
             </Modal>
 
             <Modal
@@ -348,4 +335,4 @@ const CustomersList = () => {
     );
 };
 
-export default CustomersList;
+export default MarketerProspect;

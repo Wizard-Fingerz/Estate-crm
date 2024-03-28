@@ -205,7 +205,7 @@ const ProspectsByMarketer = () => {
                         facebook_username: item.facebook_username,
                         twitter_username: item.twitter_username,
                         instagram_username: item.instagram_username,
-                        whatsapp_number: item.whatsapp_number,
+                        whatsapp_number: item.whatsapp,
                         status: item.status,
     
                         "view-btn": {

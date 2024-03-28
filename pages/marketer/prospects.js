@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ProspectsByMarketer from "@/components/Lists/ProspectsByMarketer";
+import MarketerProspect from "@/components/Lists/MarketerProspect";
 import MarketerBaseLayout from "@/components/sample_components/MarketerBaseLayout";
 import DataCard from "@/components/sample_components/DataCard";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav";
@@ -49,7 +49,7 @@ const AdminProspects = () => {
             </div>
 
 
-            <ProspectsByMarketer />
+            <MarketerProspect />
 
         </MarketerBaseLayout>
     );

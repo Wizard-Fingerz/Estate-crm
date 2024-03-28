@@ -1,11 +1,11 @@
-.right{
+.right {}
 
-}
+.left {}
 
-.left{
-
-}
-
-.container{
+.container {
     justify-content: space-between;
+}
+
+.container {
+    color: black;
 }

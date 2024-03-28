@@ -1,0 +1,26 @@
+.input {
+    border-radius: 15px;
+    border: 1px solid #1C1B64;
+    /* Fix the color value */
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 40vw;
+}
+
+
+.fileInputLabel {
+    color: black;
+    margin: 10px;
+    font-size: 10px;
+}
+
+.submitButton {
+    background-color: #1C1B64;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 15px;
+    width: 40vw;
+    cursor: pointer;
+    /* Add a pointer cursor to the button */
+}

@@ -1,11 +1,11 @@
-import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
+import AccountantBaseLayout from "@/components/sample_components/AccountantBaseLayout";
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
 import DataCard from "@/components/sample_components/DataCard";
 import CustomersList from "@/components/Lists/CustomersList";
 
-const AdminCustomers = () => {
+const AccountantCustomers = () => {
     return (
-        <AdminBaseLayout>
+        <AccountantBaseLayout>
             <DashboardNav name='Customers' />
             <div style={{ display: "flex", justifyContent: "space-between", width: '60vw' }}>
                 <DataCard label="All Customers" value="20000000" />
@@ -17,9 +17,9 @@ const AdminCustomers = () => {
 
 
 
-        </AdminBaseLayout>
+        </AccountantBaseLayout>
     );
 };
 
 
-export default AdminCustomers;
+export default AccountantCustomers;

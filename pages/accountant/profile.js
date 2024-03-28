@@ -1,14 +1,14 @@
 import DashboardNav from "@/components/sample_components/ui-components/DashboardNav"
-import AdminBaseLayout from "@/components/sample_components/AdminBaseLayout";
+import AccountantBaseLayout from "@/components/sample_components/AccountantBaseLayout";
 
-const AdminProfile = () => {
+const AcountantProfile = () => {
     return (
-        <AdminBaseLayout>
+        <AccountantBaseLayout>
             <DashboardNav name = 'Profile' />
         
-        </AdminBaseLayout>
+        </AccountantBaseLayout>
     );
 };
 
 
-export default AdminProfile;
+export default AccountantProfile;

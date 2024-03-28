@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
 import EditProspectForm from "../../Form/EditProspectForm";
+import ViewProspectDetails from "../../Form/ViewProspectDetails";
 import Table from "../../DataTables/Table";
 import { API_BASE_URL } from "@/pages/constants";
 
@@ -105,10 +106,11 @@ const ProspectsList = () => {
                 const data = await response.json();
 
                 // Update state using the callback function
-                setProspectData((prevProspectData) => {
-                    console.log('Prospect Data:', data);
-                    return data;
-                });
+                // setProspectData((prevProspectData) => {
+                //     console.log('Prospect Data:', data);
+                //     return data;
+                // });
+                setProspectData(data);
                 // Inside ProspectsList component
                 console.log('Prospect Data in ProspectsList:', prospectData);
 
@@ -126,7 +128,8 @@ const ProspectsList = () => {
     }, [prospectData]);
 
     const openViewModal = (prospectId) => {
-        const selectedProspect = tableData.find(item => item.id === prospectId);
+        const selectedProspect = prospectData.find(item => item.id === prospectId);
+        console.log('hello')
         setViewModalData(selectedProspect);
         setViewModal(true);
     };
@@ -177,8 +180,6 @@ const ProspectsList = () => {
         //alert('closing');
         setModal(false);
     };
-    console.log('Prospect Data before mapping2:', prospectData);
-
 
     return (
         <>
@@ -279,9 +280,13 @@ const ProspectsList = () => {
                 heading={"View Prospect"}
                 onClose={closeViewModal}
             >
+
+                <h1>I hope you finally work</h1>
+
+                <h1>{prospectData.address}</h1>
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
-                {viewModalData && <ViewProspectDetail prospectData={viewModalData} />}
+                {viewModalData && <ViewProspectDetails prospectData={viewModalData} />}
 
             </Modal>
 

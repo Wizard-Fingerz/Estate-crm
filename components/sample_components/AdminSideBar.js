@@ -40,11 +40,6 @@ const sidebarItems = [
     icon: FiBarChart2,
   },
   {
-    name: "Notifications",
-    href: "/admin/notifications",
-    icon: BsBell,
-  },
-  {
     name: "Profile",
     href: "/admin/profile",
     icon: BsPersonCircle,
