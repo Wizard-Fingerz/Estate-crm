@@ -11,6 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import Modal from "../../sample_components/ui-components/Modal";
 import AddProspectForm from "../../Form/AddProspectForm";
+import ViewProspectDetails from "../../Form/ViewProspectDetails";
 import GiveFollowUpReportForm from "../../Form/GiveFollowUpReportForm";
 import SendBulkMail from "../../Form/SendBulkMail";
 import SendSingleMail from "../../Form/SendSingleMail";
@@ -309,9 +310,7 @@ const MarketerProspect = () => {
             >
                 {/* Add your components for viewing property details */}
                 {/* For example: */}
-                <div>
-                    <p>Prospect details go here.</p>
-                </div>
+                {modalData && <ViewProspectDetails prospectData={modalData} />}
             </Modal>
 
             <Modal
@@ -339,10 +338,9 @@ const MarketerProspect = () => {
                 heading={"Send Single Mail"}
                 onClose={closeSingleEmailModal}
             >
-                {/* Add your form or components for editing property details */}
-                {/* For example: */}
-                <SendSingleMail />
+                <SendSingleMail prospectId={modalData?.id} />
             </Modal>
+
 
         </>
     );

@@ -1,16 +1,28 @@
-.cover_picture{
-    width: 90vw;
-    height: 30vh;
-}
+/* Marketer.module.css */
 
-.container{
+.container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: center;
-    text-align: center;
-}
-
-.profile_picture {
-    border-radius: 500%;
-    width: 20px;
-    height: 20px;
-}
+  }
+  
+  .cover_picture_container {
+    position: relative;
+    width: 1000px; /* Adjust width of the cover image */
+    height: 200px; /* Adjust height of the cover image */
+  }
+  
+  .profile_picture_container {
+    position: absolute;
+    top: 100%; /* Position the profile image in the middle vertically */
+    left: 50%; /* Position the profile image in the middle horizontally */
+    transform: translate(-50%, -50%); /* Center the profile image precisely */
+  }
+  
+  .profile_picture {
+    border-radius: 50%;
+  }
+  
+  .marketer_details{
+    margin-top: 50px;
+  }

@@ -10,6 +10,12 @@ const SendSingleMail = ({ prospectId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem('token');
+    
+        if (!token) {
+            console.error('Token not found in local storage');
+            return;
+        }
     
         const formData = new FormData();
         formData.append('subject', mailSubject);
@@ -21,6 +27,9 @@ const SendSingleMail = ({ prospectId }) => {
         try {
             const response = await fetch(`${API_BASE_URL}/property/prospects/${prospectId}/send-email/`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
                 body: formData,
             });
             if (!response.ok) {

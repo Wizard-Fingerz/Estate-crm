@@ -18,7 +18,7 @@ function DashboardNav(props) {
         />
       </div>
       <div>
-        <img src='assets/logo_white.svg' alt="Logo" />
+        {/* <img src='assets/logo_white.svg' alt="Logo" /> */}
       </div>
     </div>
   );

@@ -1,11 +1,45 @@
-.right {}
+.left {
+    margin: 20px;
+    padding: 20px;
 
-.left {}
+    @media screen and (max-width: 480px) {
+
+        margin: 0px;
+        padding: 0px;
+
+    }
+}
+
+.right {
+    border-left: 1px solid #1C1B64;
+    margin: 20px;
+    padding: 20px;
+
+    @media screen and (max-width: 480px) {
+        border-left: none;
+
+        margin: 0px;
+        padding: 0px;
+
+    }
+}
 
 .container {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+  
+  
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+    }
+  
 }
 
 .container {
     color: black;
+}
+
+.container div div {
+    margin: 10px;
 }

@@ -5,6 +5,8 @@ import { API_BASE_URL } from '@/pages/constants';
 
 
 function ConversionForm() {
+    const [prospectId, setProspectId] = useState(''); // Initialize with an empty string
+    
     const [prospect, setProspect] = useState([]);
 
     const [amount, setAmount] = useState('');
@@ -40,7 +42,8 @@ function ConversionForm() {
             });
             if (response.ok) {
                 const data = await response.json();
-                setProspect(data);
+                setProspects(data);
+                console.log(data)
             } else {
                 console.error('Failed to fetch prospects');
             }
