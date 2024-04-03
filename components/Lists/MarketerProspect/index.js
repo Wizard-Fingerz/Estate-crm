@@ -87,6 +87,7 @@ const MarketerProspect = () => {
     const [giveReportModal, setGiveReportModal] = useState(false);
     const [bulkEmailModal, setBulkEmailModal] = useState(false);
     const [singleEmailModal, setSingleEmailModal] = useState(false);
+    const [modalData, setModalData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -127,12 +128,15 @@ const MarketerProspect = () => {
         console.log('Prospect Data in ProspectsList:', prospectData);
     }, [prospectData]);
 
-    const openViewModal = () => {
+    const openViewModal = (prospectId) => {
+        const selectedProspect = prospectData.find(item => item.id === prospectId);
+        setModalData(selectedProspect);
         setViewModal(true);
     };
 
     const closeViewModal = () => {
         setViewModal(false);
+        window.location.reload();
     };
 
     const openBulkEmailModal = () => {
@@ -141,25 +145,33 @@ const MarketerProspect = () => {
 
     const closeBulkEmailModal = () => {
         setBulkEmailModal(false);
+        window.location.reload();
     };
-    const openSingleEmailModal = () => {
+    const openSingleEmailModal = (prospectId) => {
+        const selectedProspect = prospectData.find(item => item.id === prospectId);
+        setModalData(selectedProspect);
         setSingleEmailModal(true);
     };
 
     const closeSingleEmailModal = () => {
         setSingleEmailModal(false);
+        window.location.reload();
     };
 
-    const openReportModal = () => {
+    const openReportModal = (prospectId) => {
+        const selectedProspect = prospectData.find(item => item.id === prospectId);
+        setModalData(selectedProspect);
         setGiveReportModal(true);
     };
 
     const closeReportModal = () => {
         setGiveReportModal(false);
+        window.location.reload();
     };
 
     const closeAddProspectModal = () => {
         setAddProspectModal(false);
+        window.location.reload();
     };
 
     const openAddProspectModal = () => {
@@ -168,6 +180,7 @@ const MarketerProspect = () => {
 
     const closeDownloadProspectModal = () => {
         setDownloadProspectModal(false);
+        window.location.reload();
     };
 
     const openDownloadProspectModal = () => {
@@ -236,7 +249,7 @@ const MarketerProspect = () => {
                                 label="View"
                                 Icon={FaEye}
                                 inverse={true}
-                                onClick={openViewModal}
+                                onClick={() => openViewModal(item.id)}
                                 style={{ color: 'blue', borderColor: 'blue' }}
                             />
                         ),
@@ -248,7 +261,7 @@ const MarketerProspect = () => {
                                 label="Send Mail"
                                 Icon={FaEdit}
                                 inverse={true}
-                                onClick={openSingleEmailModal}
+                                onClick={() => openSingleEmailModal(item.id)}
                                 style={{ color: 'green', borderColor: 'green' }}
                             />
                         ),
@@ -260,7 +273,7 @@ const MarketerProspect = () => {
                                 label="Give Report"
                                 Icon={FaEdit}
                                 inverse={true}
-                                onClick={openReportModal}
+                                onClick={() => openReportModal(item.id)}
                                 style={{ color: 'green', borderColor: 'green' }}
                             />
                         ),
