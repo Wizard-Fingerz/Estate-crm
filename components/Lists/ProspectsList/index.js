@@ -83,7 +83,7 @@ const ProspectsList = () => {
     const [addProspectModal, setAddProspectModal] = useState(false);
     const [downloadProspectModal, setDownloadProspectModal] = useState(false);
     const [viewModal, setViewModal] = useState(false);
-    const [viewModalData, setViewModalData] = useState(null);
+    const [modalData, setModalData] = useState(null);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
@@ -106,11 +106,10 @@ const ProspectsList = () => {
                 const data = await response.json();
 
                 // Update state using the callback function
-                // setProspectData((prevProspectData) => {
-                //     console.log('Prospect Data:', data);
-                //     return data;
-                // });
-                setProspectData(data);
+                setProspectData((prevProspectData) => {
+                    console.log('Prospect Data:', data);
+                    return data;
+                });
                 // Inside ProspectsList component
                 console.log('Prospect Data in ProspectsList:', prospectData);
 
@@ -129,8 +128,7 @@ const ProspectsList = () => {
 
     const openViewModal = (prospectId) => {
         const selectedProspect = prospectData.find(item => item.id === prospectId);
-        console.log('hello')
-        setViewModalData(selectedProspect);
+        setModalData(selectedProspect);
         setViewModal(true);
     };
 
@@ -139,7 +137,9 @@ const ProspectsList = () => {
         window.location.reload();
     };
 
-    const openEditModal = () => {
+    const openEditModal = (prospectId) => {
+        const selectedProspect = prospectData.find(item => item.id === prospectId);
+        setModalData(selectedProspect);
         setEditModal(true);
     };
 
@@ -207,6 +207,7 @@ const ProspectsList = () => {
                 // Change the mapping in the 'ProspectTable' component
                 data={prospectData.map((item) => ({
                     id: item.id,
+                    prefix: item.prefix,
                     name: item.full_name,
                     address: item.address,
                     email: item.email,
@@ -224,7 +225,7 @@ const ProspectsList = () => {
                                 label="View"
                                 Icon={FaEye}
                                 inverse={true}
-                                onClick={openViewModal}
+                                onClick={() => openViewModal(item.id)}
                                 style={{ color: 'blue', borderColor: 'blue' }}
                             />
                         ),
@@ -235,7 +236,7 @@ const ProspectsList = () => {
                                 label="Edit"
                                 Icon={FaEdit}
                                 inverse={true}
-                                onClick={openEditModal}
+                                onClick={() => openEditModal(item.id)}
                                 style={{ color: 'green', borderColor: 'green' }}
                             />
                         ),
@@ -246,7 +247,7 @@ const ProspectsList = () => {
                                 label="Delete"
                                 Icon={FaTrash}
                                 inverse={true}
-                                onClick={openDeleteModal}
+                                onClick={() => openDeleteModal(item.id)}
                                 style={{ color: 'red', borderColor: 'red' }}
                             />
                         ),
@@ -281,13 +282,8 @@ const ProspectsList = () => {
                 onClose={closeViewModal}
             >
 
-                <h1>I hope you finally work</h1>
-
-                <h1>{prospectData.address}</h1>
-                {/* Add your components for viewing property details */}
-                {/* For example: */}
-                {viewModalData && <ViewProspectDetails prospectData={viewModalData} />}
-
+                {modalData && <ViewProspectDetails prospectData={modalData} />}
+                
             </Modal>
 
             <Modal

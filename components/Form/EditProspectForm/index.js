@@ -1,8 +1,8 @@
 import { BiColor } from 'react-icons/bi';
 import styles from './EditProspect.module.css';
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 
-function EditProspectForm({prospectData}) {
+function EditProspectForm({ prospectData }) {
     const [prospect_prefix, setProspectPrefix] = useState('');
     const [prospect_name, setProspectName] = useState('');
     const [prospect_address, setProspectAddress] = useState('');
@@ -30,23 +30,25 @@ function EditProspectForm({prospectData}) {
     }, []);
 
     useEffect(() => {
-        setProspectPrefix(prospectData.prospect_prefix || '');
-        setProspectName(prospectData.prospect_name || '');
-        setProspectAddress(prospectData.prospect_address || '');
-        setPropertyDescription(prospectData.description || '');
-        setProspectEmail(prospectData.prospect_email || '');
-        setProspectPhoneNumber1(prospectData.prospect_phone_number1 || '');
-        setProspectPhoneNumber2(prospectData.prospect_phone_number2 || '');
-        setProspectWhatsAppPhoneNumber(prospectData.prospect_whatsapp_phone_number || '');
-        setProspectFacebookUsername(prospectData.prospect_facebook_username || '');
-        setProspectTwitterUsername(prospectData.prospect_twitter_username || '');
-        setProspectInstagramUsername(prospectData.prospect_instagram_username || '');
-        setProspectContactSource(prospectData.prospect_contact_source || '');
-        setProspectOtherInfo(prospectData.prospect_other_info || '');
-        setPlannedCommitmentDate(prospectData.planned_commitment_date || '');
-        setAreaOfInterest(prospectData.area_of_interest || '');
-        setProperty(prospectData.property || '');
-        setMarketer(prospectData.marketer || '');
+        if (prospectData) {
+            setProspectPrefix(prospectData.prefix || '');
+            setProspectName(prospectData.full_name || '');
+            setProspectAddress(prospectData.address || '');
+            setPropertyDescription(prospectData.description || '');
+            setProspectEmail(prospectData.prospect_email || '');
+            setProspectPhoneNumber1(prospectData.prospect_phone_number1 || '');
+            setProspectPhoneNumber2(prospectData.prospect_phone_number2 || '');
+            setProspectWhatsAppPhoneNumber(prospectData.prospect_whatsapp_phone_number || '');
+            setProspectFacebookUsername(prospectData.prospect_facebook_username || '');
+            setProspectTwitterUsername(prospectData.prospect_twitter_username || '');
+            setProspectInstagramUsername(prospectData.prospect_instagram_username || '');
+            setProspectContactSource(prospectData.prospect_contact_source || '');
+            setProspectOtherInfo(prospectData.prospect_other_info || '');
+            setPlannedCommitmentDate(prospectData.planned_commitment_date || '');
+            setAreaOfInterest(prospectData.area_of_interest || '');
+            setProperty(prospectData.property || '');
+            setMarketer(prospectData.marketer || '');
+        }
     }, [prospectData]);
 
     const fetchProperties = async () => {
