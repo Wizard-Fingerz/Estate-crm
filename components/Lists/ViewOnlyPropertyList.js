@@ -140,6 +140,7 @@ const ViewOnlyPropertyList = () => {
                 onClose={handleClose}
                 positiveText={'Download'}
                 negativeText={'Cancel'}
+                
             />
         </>
     );
