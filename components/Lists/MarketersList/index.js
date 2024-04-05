@@ -242,7 +242,8 @@ const MarketersList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={tableData.map((item) => ({
+                data={Array.isArray(tableData) ? tableData.map((item) => ({
+                    
                     id: item.id,
                     employee_id: item.username,
                     employee_name: `${item.first_name} ${item.last_name}`,
@@ -283,7 +284,7 @@ const MarketersList = () => {
                             />
                         ),
                     },
-                }))}
+                })) : []}
 
             />
             <Modal

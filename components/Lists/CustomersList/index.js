@@ -223,7 +223,8 @@ const CustomersList = () => {
                 )}
                 categoryKey='payment_status'
                 heading={table_column_heading}
-                data={customerData.map((item) => ({
+                data={Array.isArray(customerData) ? customerData.map((item) => ({
+                    
                     id: item.id,
                     name: item.full_name,
                     address: item.address,
@@ -259,7 +260,7 @@ const CustomersList = () => {
                         ),
                     },
 
-                }))}
+                })) : []}
 
             />
             <Modal

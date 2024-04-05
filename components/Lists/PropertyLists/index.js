@@ -219,7 +219,8 @@ const PropertyList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={tableData.map((item) => ({
+                data={Array.isArray(tableData) ? tableData.map((item) => ({
+                    
                     id: item.id,
                     property_name: item.name,
                     property_address: item.address,
@@ -260,7 +261,7 @@ const PropertyList = () => {
                             />
                         ),
                     },
-                }))}
+                })) : []}
 
             />
             <Modal

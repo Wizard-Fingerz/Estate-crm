@@ -106,7 +106,8 @@ const ReportList = () => {
 
                 )}
                 heading={table_column_heading}
-                data={tableData.map((item) => ({
+                data={Array.isArray(tableData) ? tableData.map((item) => ({
+                    
                     marketer: item.marketer,
                     prospect: item.prospect,
                     property: item.property,
@@ -128,7 +129,7 @@ const ReportList = () => {
                     },
                     
 
-                }))}
+                })) : []}
             />
             <Modal
                 isOpen={modal}

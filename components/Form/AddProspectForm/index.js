@@ -86,6 +86,33 @@ function AddProspectForm() {
 
     };
 
+    const autoAssignMarketer = async () => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/assign/marketer/`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                // Set the fetched marketer as the value for the marketer state
+                setMarketer(data.id);
+            } else {
+                console.error('Failed to auto assign marketer');
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+        }
+    };
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
@@ -280,8 +307,8 @@ function AddProspectForm() {
                 </select>
                 <br />
 
-                <button className={styles.input}>Auto-Assign Marketer</button><br />
-
+                <button type="button" onClick={autoAssignMarketer} className={styles.input}>Auto-Assign Marketer</button><br />
+               
                 <input
                     type="date"
                     placeholder="Planned Commitment Date"

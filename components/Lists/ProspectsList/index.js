@@ -35,7 +35,7 @@ const table_column_heading = [
         key: "phone_number",
         heading: "Phone Number",
     },
-    
+
     {
         key: "phone_number2",
         heading: "Phone Number2",
@@ -47,17 +47,17 @@ const table_column_heading = [
         heading: "WhatsApp Number",
     },
 
-    
+
     {
         key: "facebook_username",
         heading: "Facebook Username",
     },
-    
+
     {
         key: "twitter_username",
         heading: "Twitter Username",
     },
-    
+
     {
         key: "instagram_username",
         heading: "Instagram Username",
@@ -205,7 +205,8 @@ const ProspectsList = () => {
                 )}
                 heading={table_column_heading}
                 // Change the mapping in the 'ProspectTable' component
-                data={prospectData.map((item) => ({
+
+                data={Array.isArray(prospectData) ? prospectData.map((item) => ({
                     id: item.id,
                     prefix: item.prefix,
                     name: item.full_name,
@@ -252,7 +253,7 @@ const ProspectsList = () => {
                             />
                         ),
                     },
-                }))}
+                })) : []}
 
             />
 
@@ -283,7 +284,7 @@ const ProspectsList = () => {
             >
 
                 {modalData && <ViewProspectDetails prospectData={modalData} />}
-                
+
             </Modal>
 
             <Modal

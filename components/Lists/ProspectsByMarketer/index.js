@@ -195,7 +195,8 @@ const ProspectsByMarketer = () => {
                     )}
                     heading={table_column_heading}
                     // Change the mapping in the 'ProspectTable' component
-                    data={prospectData.map((item) => ({
+                    data={Array.isArray(prospectData) ? prospectData.map((item) => ({
+
                         id: item.id,
                         name: item.full_name,
                         address: item.address,
@@ -241,7 +242,7 @@ const ProspectsByMarketer = () => {
                                 />
                             ),
                         },
-                    }))}
+                    })) : []}
                                                          
                 />
             
