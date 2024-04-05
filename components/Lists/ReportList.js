@@ -1,5 +1,4 @@
 import ActionButton from "../sample_components/ui-components/ActionButton";
-
 import {
     FaCloudDownloadAlt,
     FaRegFilePdf,
@@ -11,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import Modal from "../sample_components/ui-components/Modal";
 import Table from "../DataTables/Table";
+import { API_BASE_URL } from '@/pages/constants';
 
 const table_column_heading = [
     {
@@ -22,10 +22,6 @@ const table_column_heading = [
     {
         key: "prospect",
         heading: "Prospect",
-    },
-    {
-        key: "property",
-        heading: "Property",
     },
 
     {
@@ -63,7 +59,7 @@ const ReportList = () => {
             }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/property/reports/`, {
+                const response = await fetch(`${API_BASE_URL}/property/follow-ups/`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Token ${token}`,
@@ -110,7 +106,6 @@ const ReportList = () => {
                     
                     marketer: item.marketer,
                     prospect: item.prospect,
-                    property: item.property,
                     prospect_status: item.prospect_status,
                     followup_means: item.followup_means,
                     description: item.description,
