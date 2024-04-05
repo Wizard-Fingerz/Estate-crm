@@ -1,6 +1,7 @@
 import { BiColor } from 'react-icons/bi';
 import styles from './EditProspect.module.css';
 import { React, useState, useEffect } from 'react'
+import { API_BASE_URL } from '@/pages/constants';
 
 function EditProspectForm({ prospectData }) {
     const [prospect_prefix, setProspectPrefix] = useState('');

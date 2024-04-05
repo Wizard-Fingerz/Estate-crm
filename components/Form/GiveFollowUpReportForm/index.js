@@ -1,8 +1,9 @@
 import styles from './GiveFollowUpReportForm.module.css';
 import { React, useState } from 'react'
+import { API_BASE_URL } from '@/pages/constants';
 
 
-const GiveFollowUpReportForm = () => {
+const GiveFollowUpReportForm = ({ prospectData }) => {
     const [followup_means, setFollowUpMeans] = useState('');
     const [other_means, setOtherFollowUpMeans] = useState('');
     const [description, setFollowUpDescription] = useState('');
@@ -15,9 +16,59 @@ const GiveFollowUpReportForm = () => {
     const [reportMedia, setReportMedia] = useState('');
     const [mediaFileName, setMediaFileName] = useState('');
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return;
+        }
+
+        // Create form data object
+        const formData = new FormData();
+        formData.append('followup_means', followup_means);
+        formData.append('other_means', other_means);
+        formData.append('description', description);
+        formData.append('prospect_status', prospect_status);
+        formData.append('additional_comment', additional_comment);
+        formData.append('customer_feedback', customer_feedback);
+        formData.append('action_plan', action_plan);
+        formData.append('followup_time', followup_time);
+        formData.append('followup_date', followup_date);
+        formData.append('reportMedia', reportMedia);
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/property/follow-up/${prospectData.id}/`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+
+                // Display alert on successful submission
+                alert('Report submitted successfully!');
+
+            } else {
+
+                // Display alert on failed submission
+                alert('Failed to submit report!');
+
+            }
+            // Handle success or navigate to a different page
+        } catch (error) {
+            console.error('Error creating follow-up report:', error);
+            // Handle error
+        }
+    };
+
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
 
             <div className={styles.firstForm}>
 

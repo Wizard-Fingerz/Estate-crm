@@ -321,7 +321,7 @@ const MarketerProspect = () => {
             >
                 {/* Add your form or components for editing property details */}
                 {/* For example: */}
-                <GiveFollowUpReportForm />
+                {modalData &&  <GiveFollowUpReportForm prospectData={modalData} />}
             </Modal>
 
             <Modal
